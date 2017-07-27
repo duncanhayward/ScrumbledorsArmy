@@ -3,11 +3,11 @@ package com.revature.pojo;
 import java.io.Serializable;
 
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
-import javax.persistence.Entity;
+import javax.persistence.Embeddable;
+import javax.persistence.Id;
 import javax.persistence.Table;
 
-@Entity
+@Embeddable
 @Table(name = "LOG_TYPE")
 public class LogType implements Serializable {
 
@@ -16,7 +16,7 @@ public class LogType implements Serializable {
    */
   private static final long serialVersionUID = 506836275817479395L;
 
-  @EmbeddedId
+  @Id
   @Column(name = "LT_ID")
   public int id;
   @Column(name = "LT_TYPE")

@@ -3,8 +3,8 @@ package com.revature.pojo;
 import java.io.Serializable;
 
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
@@ -16,7 +16,7 @@ public class User implements Serializable {
    */
   private static final long serialVersionUID = 3013798401984886501L;
 
-  @EmbeddedId
+  @Id
   @Column(name = "U_ID")
   private int id;
   @Column(name = "U_USERNAME")

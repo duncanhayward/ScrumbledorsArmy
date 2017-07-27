@@ -5,14 +5,12 @@ import java.sql.Timestamp;
 import java.util.List;
 
 import javax.persistence.Column;
-import javax.persistence.Embeddable;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-@Embeddable
 @Entity
 @Table(name = "STORY")
 public class Story implements Serializable {
@@ -22,7 +20,7 @@ public class Story implements Serializable {
    */
   private static final long serialVersionUID = 7483865353683469642L;
 
-  @EmbeddedId
+  @Id
   @Column(name = "S_ID")
   private int id;
   @ManyToOne

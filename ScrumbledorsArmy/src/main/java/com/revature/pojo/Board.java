@@ -5,13 +5,13 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-@Embeddable
 @Entity
+@Embeddable
 @Table(name = "BOARD")
 public class Board implements Serializable {
 
@@ -20,7 +20,7 @@ public class Board implements Serializable {
    */
   private static final long serialVersionUID = -4734100175726060405L;
 
-  @EmbeddedId
+  @Id
   @Column(name = "B_ID")
   private int id;
   @Column(name = "B_NAME")

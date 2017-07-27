@@ -3,10 +3,11 @@ package com.revature.pojo;
 import java.io.Serializable;
 
 import javax.persistence.Column;
-import javax.persistence.Embeddable;
+import javax.persistence.EmbeddedId;
+import javax.persistence.Entity;
 import javax.persistence.Table;
 
-@Embeddable
+@Entity
 @Table(name = "BOARD_ROLE")
 public class BoardRole implements Serializable {
 
@@ -15,10 +16,13 @@ public class BoardRole implements Serializable {
    */
   private static final long serialVersionUID = -3063808587810134479L;
 
+  @EmbeddedId
   @Column(name = "U_ID")
   private User user;
+  @EmbeddedId
   @Column(name = "B_ID")
   private Board board;
+  @EmbeddedId
   @Column(name = "R_ID")
   private Role role;
 
