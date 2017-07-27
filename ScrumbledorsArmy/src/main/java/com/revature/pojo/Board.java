@@ -1,12 +1,16 @@
 package com.revature.pojo;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Column;
+import javax.persistence.Embeddable;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+@Embeddable
 @Entity
 @Table(name = "BOARD")
 public class Board implements Serializable {
@@ -24,19 +28,23 @@ public class Board implements Serializable {
   @Column(name = "B_DESCRIPTION")
   private String description;
 
+  @OneToMany(mappedBy = "id")
+  private List<SwimLane> swimLanes;
+
   public Board() {
   }
 
-  public Board(int id, String name, String description) {
+  public Board(int id, String name, String description, List<SwimLane> swimLanes) {
     super();
     this.id = id;
     this.name = name;
     this.description = description;
+    this.swimLanes = swimLanes;
   }
 
   @Override
   public String toString() {
-    return "Board [id=" + id + ", name=" + name + ", description=" + description + "]";
+    return "Board [id=" + id + ", name=" + name + ", description=" + description + ", swimLanes=" + swimLanes + "]";
   }
 
   public int getId() {
@@ -61,6 +69,14 @@ public class Board implements Serializable {
 
   public void setDescription(String description) {
     this.description = description;
+  }
+
+  public List<SwimLane> getSwimLanes() {
+    return swimLanes;
+  }
+
+  public void setSwimLanes(List<SwimLane> swimLanes) {
+    this.swimLanes = swimLanes;
   }
 
 }

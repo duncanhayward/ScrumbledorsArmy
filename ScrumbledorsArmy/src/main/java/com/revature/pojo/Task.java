@@ -3,11 +3,12 @@ package com.revature.pojo;
 import java.io.Serializable;
 
 import javax.persistence.Column;
-import javax.persistence.Embeddable;
-import javax.persistence.Id;
+import javax.persistence.EmbeddedId;
+import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-@Embeddable
+@Entity
 @Table(name = "TASK")
 public class Task implements Serializable {
 
@@ -16,9 +17,10 @@ public class Task implements Serializable {
    */
   private static final long serialVersionUID = 5786947412418542399L;
 
-  @Id
+  @EmbeddedId
   @Column(name = "T_ID")
   private int id;
+  @ManyToOne
   @Column(name = "S_ID")
   private Story story;
   @Column(name = "T_DESCRIPTION")

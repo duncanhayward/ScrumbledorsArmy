@@ -1,11 +1,14 @@
 package com.revature.pojo;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Embeddable
@@ -21,6 +24,7 @@ public class SwimLane implements Serializable {
   @EmbeddedId
   @Column(name = "SL_ID")
   private int id;
+  @ManyToOne
   @Column(name = "B_ID")
   private Board board;
   @Column(name = "SL_NAME")
@@ -28,20 +32,25 @@ public class SwimLane implements Serializable {
   @Column(name = "SL_ORDER")
   private int order;
 
+  @OneToMany(mappedBy = "id")
+  private List<Story> stories;
+
   public SwimLane() {
   }
 
-  public SwimLane(int id, Board board, String name, int order) {
+  public SwimLane(int id, Board board, String name, int order, List<Story> stories) {
     super();
     this.id = id;
     this.board = board;
     this.name = name;
     this.order = order;
+    this.stories = stories;
   }
 
   @Override
   public String toString() {
-    return "SwimLane [id=" + id + ", board=" + board + ", name=" + name + ", order=" + order + "]";
+    return "SwimLane [id=" + id + ", board=" + board + ", name=" + name + ", order=" + order + ", stories=" + stories
+        + "]";
   }
 
   public int getId() {
@@ -74,6 +83,14 @@ public class SwimLane implements Serializable {
 
   public void setOrder(int order) {
     this.order = order;
+  }
+
+  public List<Story> getStories() {
+    return stories;
+  }
+
+  public void setStories(List<Story> stories) {
+    this.stories = stories;
   }
 
 }

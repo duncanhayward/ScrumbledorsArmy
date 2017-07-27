@@ -2,11 +2,14 @@ package com.revature.pojo;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Embeddable
@@ -22,6 +25,7 @@ public class Story implements Serializable {
   @EmbeddedId
   @Column(name = "S_ID")
   private int id;
+  @ManyToOne
   @Column(name = "SL_ID")
   private SwimLane swimLane;
   @Column(name = "S_POINTS")
@@ -37,11 +41,14 @@ public class Story implements Serializable {
   @Column(name = "S_DONE")
   private String done; // actual type is constrained char treated as boolean
 
+  @OneToMany(mappedBy = "id")
+  private List<Task> tasks;
+
   public Story() {
   }
 
   public Story(int id, SwimLane swimLane, int points, String description, Timestamp start, Timestamp endExpected,
-      Timestamp endActual, String done) {
+      Timestamp endActual, String done, List<Task> tasks) {
     super();
     this.id = id;
     this.swimLane = swimLane;
@@ -51,12 +58,14 @@ public class Story implements Serializable {
     this.endExpected = endExpected;
     this.endActual = endActual;
     this.done = done;
+    this.tasks = tasks;
   }
 
   @Override
   public String toString() {
     return "Story [id=" + id + ", swimLane=" + swimLane + ", points=" + points + ", description=" + description
-        + ", start=" + start + ", endExpected=" + endExpected + ", endActual=" + endActual + ", done=" + done + "]";
+        + ", start=" + start + ", endExpected=" + endExpected + ", endActual=" + endActual + ", done=" + done
+        + ", tasks=" + tasks + "]";
   }
 
   public int getId() {
@@ -121,6 +130,14 @@ public class Story implements Serializable {
 
   public void setDone(String done) {
     this.done = done;
+  }
+
+  public List<Task> getTasks() {
+    return tasks;
+  }
+
+  public void setTasks(List<Task> tasks) {
+    this.tasks = tasks;
   }
 
 }
