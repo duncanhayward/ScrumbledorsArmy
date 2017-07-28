@@ -6,8 +6,11 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
@@ -21,6 +24,8 @@ public class Board implements Serializable {
   private static final long serialVersionUID = -4734100175726060405L;
 
   @Id
+  @SequenceGenerator(name = "seq", sequenceName = "BOARD_SEQ")
+  @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq")
   @Column(name = "B_ID")
   private int id;
   @Column(name = "B_NAME")

@@ -4,7 +4,10 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Embeddable
@@ -17,6 +20,8 @@ public class Role implements Serializable {
   private static final long serialVersionUID = -3443225460812901410L;
 
   @Id
+  @SequenceGenerator(name = "seq", sequenceName = "ROLE_SEQ")
+  @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq")
   @Column(name = "R_ID")
   private int id;
   @Column(name = "R_ROLE")

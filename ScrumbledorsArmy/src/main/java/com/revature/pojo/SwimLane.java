@@ -5,9 +5,12 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
@@ -20,6 +23,8 @@ public class SwimLane implements Serializable {
   private static final long serialVersionUID = -8833805833751660619L;
 
   @Id
+  @SequenceGenerator(name = "seq", sequenceName = "SWIM_LANE_SEQ")
+  @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq")
   @Column(name = "SL_ID")
   private int id;
   @ManyToOne

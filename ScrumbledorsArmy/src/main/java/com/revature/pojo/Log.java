@@ -5,7 +5,10 @@ import java.sql.Timestamp;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
@@ -18,6 +21,8 @@ public class Log implements Serializable {
   private static final long serialVersionUID = 2762951739501458964L;
 
   @Id
+  @SequenceGenerator(name = "seq", sequenceName = "LOG_SEQ")
+  @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq")
   @Column(name = "L_ID")
   private int id;
   @Column(name = "U_ID")

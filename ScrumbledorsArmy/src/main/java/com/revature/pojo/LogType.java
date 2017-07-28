@@ -4,7 +4,10 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Embeddable
@@ -17,6 +20,8 @@ public class LogType implements Serializable {
   private static final long serialVersionUID = 506836275817479395L;
 
   @Id
+  @SequenceGenerator(name = "seq", sequenceName = "LOG_TYPE_SEQ")
+  @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq")
   @Column(name = "LT_ID")
   public int id;
   @Column(name = "LT_TYPE")

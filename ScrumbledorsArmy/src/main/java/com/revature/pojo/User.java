@@ -4,7 +4,10 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
@@ -17,6 +20,8 @@ public class User implements Serializable {
   private static final long serialVersionUID = 3013798401984886501L;
 
   @Id
+  @SequenceGenerator(name = "seq", sequenceName = "USERS_SEQ")
+  @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq")
   @Column(name = "U_ID")
   private int id;
   @Column(name = "U_USERNAME")
