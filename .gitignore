@@ -1,6 +1,9 @@
 /.metadata/
 
-/ScrumbledorsArmy/target/*
+/ScrumbledorsArmy/target/
+/ScrumbledorsArmy/.settings/
+/ScrumbledorsArmy/.project
+/ScrumbledorsArmy/.classpath
 
 /Servers/
 
