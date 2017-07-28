@@ -13,7 +13,7 @@ import org.springframework.stereotype.Repository;
 import com.revature.pojo.Task;
 @Repository
 @Component
-public class TaskDaoImpli implements Dao<Task> {
+public class TaskDaoImpl implements Dao<Task> {
 	
 	@Autowired
 	private SessionFactory sessionFactory;
