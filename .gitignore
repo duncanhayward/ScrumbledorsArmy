@@ -1,1 +1,8 @@
-getIgnore
+
+/.metadata/
+
+/ScrumbledorsArmy/target/
+
+/Servers/
+
+/RemoteSystemsTempFiles/
