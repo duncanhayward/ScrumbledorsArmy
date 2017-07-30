@@ -17,11 +17,11 @@ import com.revature.pojo.User;
 
 @Repository
 @Component
-public class BoardRoleDaoImpl implements Dao<BoardRole> {
+public class BoardRoleDaoImpl implements BoardRoleDao {
 
   @Autowired
   private SessionFactory sessionFactory;
-  
+
   @Override
   public void insert(BoardRole obj) {
     System.out.println("Inserting a Board Role");
@@ -36,18 +36,21 @@ public class BoardRoleDaoImpl implements Dao<BoardRole> {
     return null;
   }
 
+  @Override
   public BoardRole getPojoByUserId(User obj) {
     System.out.println("Pulling a Board Role by User ID");
     Session session = sessionFactory.getCurrentSession();
     return (BoardRole) session.get(BoardRole.class, obj.getId());
   }
 
+  @Override
   public BoardRole getPojoByBoardId(Board obj) {
     System.out.println("Pulling a Board Role by Board ID");
     Session session = sessionFactory.getCurrentSession();
     return (BoardRole) session.get(BoardRole.class, obj.getId());
   }
 
+  @Override
   public BoardRole getPojoByRoleId(Role obj) {
     System.out.println("Pulling a Board Role by Role ID");
     Session session = sessionFactory.getCurrentSession();
