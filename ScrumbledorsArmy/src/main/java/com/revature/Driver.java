@@ -3,6 +3,7 @@ package com.revature;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import com.revature.pojo.Board;
 import com.revature.pojo.User;
 import com.revature.service.AppService;
 
@@ -14,11 +15,17 @@ public class Driver {
     ApplicationContext ac = new ClassPathXmlApplicationContext("beans.xml");
     AppService service = (AppService) ac.getBean("AppService");
 
-    User user = new User();
+/*    User user = new User();
     user.setId(1);
     user = service.getUserById(user);
 
-    System.out.println(user);
+    System.out.println(user);*/
+
+    Board board = new Board();
+    board.setId(2);
+    board = service.getBoardById(board);
+
+    System.out.println(board);
   }
 
 }
