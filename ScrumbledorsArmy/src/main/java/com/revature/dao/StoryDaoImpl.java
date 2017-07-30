@@ -10,67 +10,64 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
-import com.revature.pojo.Board;
 import com.revature.pojo.Story;
 
 @Repository
 @Component
-public class StoryDaoImpli implements Dao<Story> {
-	@Autowired
-	 private SessionFactory sessionFactory;
+public class StoryDaoImpl implements Dao<Story> {
 
-	@Override
-	public void insert(Story obj) {
-		 System.out.println("inserting a Story");
-	        Session session = sessionFactory.getCurrentSession();
-	        session.save(obj);
-		
-	}
+  @Autowired
+  private SessionFactory sessionFactory;
 
-	@Override
-	public Story getPojoById(Story obj) {
-		System.out.println("Pulling a Story by ID");
-        Session session = sessionFactory.getCurrentSession();
-		return (Story)session.get(Story.class,obj.getId());
-	}
+  @Override
+  public void insert(Story obj) {
+    System.out.println("Inserting a Story");
+    Session session = sessionFactory.getCurrentSession();
+    session.save(obj);
+  }
 
-	@Override
-	public List<Story> getAllPojos() {
-		System.out.println("Getting all Stories");
-        Session session= sessionFactory.getCurrentSession();
-        Criteria crit=session.createCriteria(Story.class);// TODO Auto-generated method stub
-		List<Story> stories=crit.list();
-        return stories;
-	}
+  @Override
+  public Story getPojoById(Story obj) {
+    System.out.println("Pulling a Story by ID");
+    Session session = sessionFactory.getCurrentSession();
+    return (Story) session.get(Story.class, obj.getId());
+  }
 
-	@Override
-	public List<Story> getAllPojos(List<Criterion> restrictions) {
-		System.out.println("Getting all Stories with Criteria");
-        Session session= sessionFactory.getCurrentSession();
-        Criteria crit=session.createCriteria(Story.class);
-        for(Criterion a:restrictions){
-            
-            crit.add(a);
-            
-        }
-        List<Story> stories=crit.list();
-		return stories;
-	}
+  @Override
+  public List<Story> getAllPojos() {
+    System.out.println("Getting all Stories");
+    Session session = sessionFactory.getCurrentSession();
+    Criteria crit = session.createCriteria(Story.class);
+    List<Story> stories = crit.list();
+    return stories;
+  }
 
-	@Override
-	public void update(Story obj) {
-			System.out.println("Updating a Story");
-	        Session session = sessionFactory.getCurrentSession();
-	        session.update(obj);
-		
-	}
+  @Override
+  public List<Story> getAllPojos(List<Criterion> restrictions) {
+    System.out.println("Getting all Stories with Criteria");
+    Session session = sessionFactory.getCurrentSession();
+    Criteria crit = session.createCriteria(Story.class);
+    for (Criterion c : restrictions) {
 
-	@Override
-	public void delete(Story obj) {
-		System.out.println("Deleting a Story");
-        Session session = sessionFactory.getCurrentSession();
-        session.delete(obj);
-		
-	}
+      crit.add(c);
+
+    }
+    List<Story> stories = crit.list();
+    return stories;
+  }
+
+  @Override
+  public void update(Story obj) {
+    System.out.println("Updating a Story");
+    Session session = sessionFactory.getCurrentSession();
+    session.update(obj);
+  }
+
+  @Override
+  public void delete(Story obj) {
+    System.out.println("Deleting a Story");
+    Session session = sessionFactory.getCurrentSession();
+    session.delete(obj);
+  }
 
 }
