@@ -6,7 +6,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import com.revature.pojo.User;
 import com.revature.service.AppService;
 
-public class TestDriver {
+public class Driver {
 
   public static void main(String[] args) {
     System.out.println("Test");
