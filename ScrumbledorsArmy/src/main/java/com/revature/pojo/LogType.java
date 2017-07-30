@@ -3,14 +3,14 @@ package com.revature.pojo;
 import java.io.Serializable;
 
 import javax.persistence.Column;
-import javax.persistence.Embeddable;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-@Embeddable
+@Entity
 @Table(name = "LOG_TYPE")
 public class LogType implements Serializable {
 

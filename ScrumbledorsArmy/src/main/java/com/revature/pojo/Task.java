@@ -7,7 +7,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -25,7 +24,6 @@ public class Task implements Serializable {
   @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq")
   @Column(name = "T_ID")
   private int id;
-  @ManyToOne
   @Column(name = "S_ID")
   private Story story;
   @Column(name = "T_DESCRIPTION")

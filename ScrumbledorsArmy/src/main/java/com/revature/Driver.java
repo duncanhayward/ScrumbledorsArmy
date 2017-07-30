@@ -16,7 +16,7 @@ public class Driver {
 
     User user = new User();
     user.setId(1);
-    service.getUserById(user);
+    user = service.getUserById(user);
 
     System.out.println(user);
   }
