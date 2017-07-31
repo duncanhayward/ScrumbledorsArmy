@@ -1,8 +1,8 @@
 package com.revature.dao;
 
-import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.TreeSet;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
@@ -40,7 +40,7 @@ public class UserDaoImpl implements Dao<User> {
     System.out.println("Getting all Users");
     Session session = sessionFactory.getCurrentSession();
     Criteria crit = session.createCriteria(User.class);
-    Set<User> list = new LinkedHashSet<User>(crit.list());
+    Set<User> list = new TreeSet<User>(crit.list());
     return list;
   }
 
@@ -52,7 +52,7 @@ public class UserDaoImpl implements Dao<User> {
     for (Criterion c : restrictions) {
       crit.add(c);
     }
-    Set<User> list = new LinkedHashSet<User>(crit.list());
+    Set<User> list = new TreeSet<User>(crit.list());
     return list;
   }
 

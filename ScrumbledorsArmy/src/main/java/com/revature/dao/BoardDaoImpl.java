@@ -1,8 +1,9 @@
 package com.revature.dao;
 
-import java.util.LinkedHashSet;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
+import java.util.TreeSet;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
@@ -16,7 +17,7 @@ import com.revature.pojo.Board;
 
 @Repository
 @Component
-public class BoardDaoImpl implements Dao<Board> {
+public class BoardDaoImpl implements Dao<Board>, Comparator<Board> {
 
   @Autowired
   private SessionFactory sessionFactory;
@@ -40,7 +41,7 @@ public class BoardDaoImpl implements Dao<Board> {
     System.out.println("Getting all Boards");
     Session session = sessionFactory.getCurrentSession();
     Criteria crit = session.createCriteria(Board.class);
-    Set<Board> boards = new LinkedHashSet<Board>(crit.list());
+    Set<Board> boards = new TreeSet<Board>(crit.list());
     return boards;
   }
 
@@ -54,7 +55,7 @@ public class BoardDaoImpl implements Dao<Board> {
       crit.add(c);
 
     }
-    Set<Board> boards = new LinkedHashSet<Board>(crit.list());
+    Set<Board> boards = new TreeSet<Board>(crit.list());
     return boards;
   }
 
@@ -70,6 +71,11 @@ public class BoardDaoImpl implements Dao<Board> {
     System.out.println("Deleting a Board");
     Session session = sessionFactory.getCurrentSession();
     session.delete(obj);
+  }
+
+  @Override
+  public int compare(Board o1, Board o2) {
+    return o1.getId() - o2.getId();
   }
 
 }

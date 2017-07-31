@@ -1,8 +1,8 @@
 package com.revature.dao;
 
-import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.TreeSet;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
@@ -40,7 +40,7 @@ public class SwimLaneDaoImpl implements Dao<SwimLane> {
     System.out.println("Getting all Swim Lanes");
     Session session = sessionFactory.getCurrentSession();
     Criteria crit = session.createCriteria(SwimLane.class);
-    Set<SwimLane> list = new LinkedHashSet<SwimLane>(crit.list());
+    Set<SwimLane> list = new TreeSet<SwimLane>(crit.list());
     return list;
   }
 
@@ -52,7 +52,7 @@ public class SwimLaneDaoImpl implements Dao<SwimLane> {
     for (Criterion c : restrictions) {
       crit.add(c);
     }
-    Set<SwimLane> list = new LinkedHashSet<SwimLane>(crit.list());
+    Set<SwimLane> list = new TreeSet<SwimLane>(crit.list());
     return list;
   }
 

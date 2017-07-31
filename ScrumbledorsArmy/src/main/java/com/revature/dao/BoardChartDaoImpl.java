@@ -1,8 +1,8 @@
 package com.revature.dao;
 
-import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.TreeSet;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
@@ -55,7 +55,7 @@ public class BoardChartDaoImpl implements Dao<BoardChart> {
     System.out.println("Getting all Board Charts");
     Session session = sessionFactory.getCurrentSession();
     Criteria crit = session.createCriteria(BoardChart.class);
-    Set<BoardChart> charts = new LinkedHashSet<BoardChart>(crit.list());
+    Set<BoardChart> charts = new TreeSet<BoardChart>(crit.list());
     return charts;
   }
 
@@ -69,7 +69,7 @@ public class BoardChartDaoImpl implements Dao<BoardChart> {
       crit.add(c);
 
     }
-    Set<BoardChart> charts = new LinkedHashSet<BoardChart>(crit.list());
+    Set<BoardChart> charts = new TreeSet<BoardChart>(crit.list());
     return charts;
   }
 

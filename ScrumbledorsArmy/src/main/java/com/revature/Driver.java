@@ -17,7 +17,7 @@ public class Driver {
     AppService service = (AppService) ac.getBean("AppService");
 
 /*    User user = new User();
-    user.setId(1);
+    user.setId(21);
     user = service.getUserById(user);
 
     System.out.println(user);*/

@@ -1,8 +1,8 @@
 package com.revature.dao;
 
-import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.TreeSet;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
@@ -40,7 +40,7 @@ public class LogDaoImpl implements Dao<Log> {
     System.out.println("Getting all Logs");
     Session session = sessionFactory.getCurrentSession();
     Criteria crit = session.createCriteria(Log.class);
-    Set<Log> logs = new LinkedHashSet<Log>(crit.list());
+    Set<Log> logs = new TreeSet<Log>(crit.list());
     return logs;
   }
 
@@ -54,7 +54,7 @@ public class LogDaoImpl implements Dao<Log> {
       crit.add(c);
 
     }
-    Set<Log> logs = new LinkedHashSet<Log>(crit.list());
+    Set<Log> logs = new TreeSet<Log>(crit.list());
     return logs;
   }
 
