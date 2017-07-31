@@ -1,6 +1,8 @@
 package com.revature.dao;
 
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
@@ -34,23 +36,23 @@ public class SwimLaneDaoImpl implements Dao<SwimLane> {
   }
 
   @Override
-  public List<SwimLane> getAllPojos() {
+  public Set<SwimLane> getAllPojos() {
     System.out.println("Getting all Swim Lanes");
     Session session = sessionFactory.getCurrentSession();
     Criteria crit = session.createCriteria(SwimLane.class);
-    List<SwimLane> list = crit.list();
+    Set<SwimLane> list = new LinkedHashSet<SwimLane>(crit.list());
     return list;
   }
 
   @Override
-  public List<SwimLane> getAllPojos(List<Criterion> restrictions) {
+  public Set<SwimLane> getAllPojos(List<Criterion> restrictions) {
     System.out.println("Getting all Swim Lanes with Criteria");
     Session session = sessionFactory.getCurrentSession();
     Criteria crit = session.createCriteria(SwimLane.class);
     for (Criterion c : restrictions) {
       crit.add(c);
     }
-    List<SwimLane> list = crit.list();
+    Set<SwimLane> list = new LinkedHashSet<SwimLane>(crit.list());
     return list;
   }
 

@@ -1,6 +1,8 @@
 package com.revature.dao;
 
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
@@ -35,16 +37,16 @@ public class TaskDaoImpl implements Dao<Task> {
   }
 
   @Override
-  public List<Task> getAllPojos() {
+  public Set<Task> getAllPojos() {
     System.out.println("Getting all tasks");
     Session session = sessionFactory.getCurrentSession();
     Criteria crit = session.createCriteria(Task.class);
-    List<Task> tasks = crit.list();
+    Set<Task> tasks = new LinkedHashSet<Task>(crit.list());
     return tasks;
   }
 
   @Override
-  public List<Task> getAllPojos(List<Criterion> restrictions) {
+  public Set<Task> getAllPojos(List<Criterion> restrictions) {
     System.out.println("Getting all Tasks with Criteria");
     Session session = sessionFactory.getCurrentSession();
     Criteria crit = session.createCriteria(Task.class);
@@ -53,7 +55,7 @@ public class TaskDaoImpl implements Dao<Task> {
       crit.add(c);
 
     }
-    List<Task> tasks = crit.list();
+    Set<Task> tasks = new LinkedHashSet<Task>(crit.list());
     return tasks;
   }
 

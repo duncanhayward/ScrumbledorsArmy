@@ -2,7 +2,7 @@ package com.revature.pojo;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
-import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -47,13 +47,13 @@ public class Story implements Serializable {
   private String done; // actual type is constrained char treated as boolean
 
   @OneToMany(fetch = FetchType.EAGER)
-  private List<Task> tasks;
+  private Set<Task> tasks;
 
   public Story() {
   }
 
   public Story(int id, SwimLane swimLane, int points, String description, Timestamp start, Timestamp endExpected,
-      Timestamp endActual, String done, List<Task> tasks) {
+      Timestamp endActual, String done, Set<Task> tasks) {
     super();
     this.id = id;
     this.swimLane = swimLane;
@@ -137,11 +137,11 @@ public class Story implements Serializable {
     this.done = done;
   }
 
-  public List<Task> getTasks() {
+  public Set<Task> getTasks() {
     return tasks;
   }
 
-  public void setTasks(List<Task> tasks) {
+  public void setTasks(Set<Task> tasks) {
     this.tasks = tasks;
   }
 

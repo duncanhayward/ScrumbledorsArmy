@@ -1,6 +1,8 @@
 package com.revature.dao;
 
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
@@ -34,16 +36,16 @@ public class BoardDaoImpl implements Dao<Board> {
   }
 
   @Override
-  public List<Board> getAllPojos() {
+  public Set<Board> getAllPojos() {
     System.out.println("Getting all Boards");
     Session session = sessionFactory.getCurrentSession();
     Criteria crit = session.createCriteria(Board.class);
-    List<Board> boards = crit.list();
+    Set<Board> boards = new LinkedHashSet<Board>(crit.list());
     return boards;
   }
 
   @Override
-  public List<Board> getAllPojos(List<Criterion> restrictions) {
+  public Set<Board> getAllPojos(List<Criterion> restrictions) {
     System.out.println("Getting all Boards with Criteria");
     Session session = sessionFactory.getCurrentSession();
     Criteria crit = session.createCriteria(Board.class);
@@ -52,7 +54,7 @@ public class BoardDaoImpl implements Dao<Board> {
       crit.add(c);
 
     }
-    List<Board> boards = crit.list();
+    Set<Board> boards = new LinkedHashSet<Board>(crit.list());
     return boards;
   }
 

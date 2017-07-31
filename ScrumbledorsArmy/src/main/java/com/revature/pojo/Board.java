@@ -1,7 +1,7 @@
 package com.revature.pojo;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -33,12 +33,12 @@ public class Board implements Serializable {
   private String description;
 
   @OneToMany(fetch = FetchType.EAGER)
-  private List<SwimLane> swimLanes;
+  private Set<SwimLane> swimLanes;
 
   public Board() {
   }
 
-  public Board(int id, String name, String description, List<SwimLane> swimLanes) {
+  public Board(int id, String name, String description, Set<SwimLane> swimLanes) {
     super();
     this.id = id;
     this.name = name;
@@ -75,11 +75,11 @@ public class Board implements Serializable {
     this.description = description;
   }
 
-  public List<SwimLane> getSwimLanes() {
+  public Set<SwimLane> getSwimLanes() {
     return swimLanes;
   }
 
-  public void setSwimLanes(List<SwimLane> swimLanes) {
+  public void setSwimLanes(Set<SwimLane> swimLanes) {
     this.swimLanes = swimLanes;
   }
 

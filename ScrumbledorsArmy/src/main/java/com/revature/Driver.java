@@ -1,10 +1,11 @@
 package com.revature;
 
+import java.util.Set;
+
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.revature.pojo.Board;
-import com.revature.pojo.User;
 import com.revature.service.AppService;
 
 public class Driver {
@@ -21,11 +22,9 @@ public class Driver {
 
     System.out.println(user);*/
 
-    Board board = new Board();
-    board.setId(2);
-    board = service.getBoardById(board);
+    Set<Board> boards = service.getAllBoards();
 
-    System.out.println(board);
+    System.out.println(boards);
   }
 
 }

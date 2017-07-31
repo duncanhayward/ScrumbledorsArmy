@@ -1,6 +1,8 @@
 package com.revature.dao;
 
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
@@ -34,23 +36,23 @@ public class UserDaoImpl implements Dao<User> {
   }
 
   @Override
-  public List<User> getAllPojos() {
+  public Set<User> getAllPojos() {
     System.out.println("Getting all Users");
     Session session = sessionFactory.getCurrentSession();
     Criteria crit = session.createCriteria(User.class);
-    List<User> list = crit.list();
+    Set<User> list = new LinkedHashSet<User>(crit.list());
     return list;
   }
 
   @Override
-  public List<User> getAllPojos(List<Criterion> restrictions) {
+  public Set<User> getAllPojos(List<Criterion> restrictions) {
     System.out.println("Getting all Users with Criteria");
     Session session = sessionFactory.getCurrentSession();
     Criteria crit = session.createCriteria(User.class);
     for (Criterion c : restrictions) {
       crit.add(c);
     }
-    List<User> list = crit.list();
+    Set<User> list = new LinkedHashSet<User>(crit.list());
     return list;
   }
 
