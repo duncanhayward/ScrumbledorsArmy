@@ -1,8 +1,6 @@
 package com.revature.dao;
 
 import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
@@ -60,16 +58,15 @@ public class BoardRoleDaoImpl implements BoardRoleDao {
   }
 
   @Override
-  public Set<BoardRole> getAllPojos() {
+  public List<BoardRole> getAllPojos() {
     System.out.println("Getting all Board Roles");
     Session session = sessionFactory.getCurrentSession();
     Criteria crit = session.createCriteria(BoardRole.class);
-    Set<BoardRole> roles = new TreeSet<BoardRole>(crit.list());
-    return roles;
+    return (List<BoardRole>) crit.list();
   }
 
   @Override
-  public Set<BoardRole> getAllPojos(List<Criterion> restrictions) {
+  public List<BoardRole> getAllPojos(List<Criterion> restrictions) {
     System.out.println("Getting all Board Roles with Criteria");
     Session session = sessionFactory.getCurrentSession();
     Criteria crit = session.createCriteria(BoardRole.class);
@@ -78,8 +75,7 @@ public class BoardRoleDaoImpl implements BoardRoleDao {
       crit.add(c);
 
     }
-    Set<BoardRole> roles = new TreeSet<BoardRole>(crit.list());
-    return roles;
+    return (List<BoardRole>) crit.list();
   }
 
   @Override

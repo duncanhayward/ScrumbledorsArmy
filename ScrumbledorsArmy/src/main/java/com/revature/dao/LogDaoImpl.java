@@ -1,8 +1,6 @@
 package com.revature.dao;
 
 import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
@@ -36,16 +34,15 @@ public class LogDaoImpl implements Dao<Log> {
   }
 
   @Override
-  public Set<Log> getAllPojos() {
+  public List<Log> getAllPojos() {
     System.out.println("Getting all Logs");
     Session session = sessionFactory.getCurrentSession();
     Criteria crit = session.createCriteria(Log.class);
-    Set<Log> logs = new TreeSet<Log>(crit.list());
-    return logs;
+    return (List<Log>) crit.list();
   }
 
   @Override
-  public Set<Log> getAllPojos(List<Criterion> restrictions) {
+  public List<Log> getAllPojos(List<Criterion> restrictions) {
     System.out.println("Getting all Logs with Criteria");
     Session session = sessionFactory.getCurrentSession();
     Criteria crit = session.createCriteria(Log.class);
@@ -54,8 +51,7 @@ public class LogDaoImpl implements Dao<Log> {
       crit.add(c);
 
     }
-    Set<Log> logs = new TreeSet<Log>(crit.list());
-    return logs;
+    return (List<Log>) crit.list();
   }
 
   @Override

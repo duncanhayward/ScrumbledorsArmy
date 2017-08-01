@@ -1,9 +1,6 @@
 package com.revature.dao;
 
-import java.util.Comparator;
 import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
@@ -17,7 +14,7 @@ import com.revature.pojo.Board;
 
 @Repository
 @Component
-public class BoardDaoImpl implements Dao<Board>, Comparator<Board> {
+public class BoardDaoImpl implements Dao<Board> {
 
   @Autowired
   private SessionFactory sessionFactory;
@@ -37,16 +34,15 @@ public class BoardDaoImpl implements Dao<Board>, Comparator<Board> {
   }
 
   @Override
-  public Set<Board> getAllPojos() {
+  public List<Board> getAllPojos() {
     System.out.println("Getting all Boards");
     Session session = sessionFactory.getCurrentSession();
     Criteria crit = session.createCriteria(Board.class);
-    Set<Board> boards = new TreeSet<Board>(crit.list());
-    return boards;
+    return (List<Board>) crit.list();
   }
 
   @Override
-  public Set<Board> getAllPojos(List<Criterion> restrictions) {
+  public List<Board> getAllPojos(List<Criterion> restrictions) {
     System.out.println("Getting all Boards with Criteria");
     Session session = sessionFactory.getCurrentSession();
     Criteria crit = session.createCriteria(Board.class);
@@ -55,8 +51,7 @@ public class BoardDaoImpl implements Dao<Board>, Comparator<Board> {
       crit.add(c);
 
     }
-    Set<Board> boards = new TreeSet<Board>(crit.list());
-    return boards;
+    return (List<Board>) crit.list();
   }
 
   @Override
@@ -71,11 +66,6 @@ public class BoardDaoImpl implements Dao<Board>, Comparator<Board> {
     System.out.println("Deleting a Board");
     Session session = sessionFactory.getCurrentSession();
     session.delete(obj);
-  }
-
-  @Override
-  public int compare(Board o1, Board o2) {
-    return o1.getId() - o2.getId();
   }
 
 }

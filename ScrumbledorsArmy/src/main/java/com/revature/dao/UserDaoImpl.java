@@ -1,8 +1,6 @@
 package com.revature.dao;
 
 import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
@@ -36,24 +34,22 @@ public class UserDaoImpl implements Dao<User> {
   }
 
   @Override
-  public Set<User> getAllPojos() {
+  public List<User> getAllPojos() {
     System.out.println("Getting all Users");
     Session session = sessionFactory.getCurrentSession();
     Criteria crit = session.createCriteria(User.class);
-    Set<User> list = new TreeSet<User>(crit.list());
-    return list;
+    return (List<User>) crit.list();
   }
 
   @Override
-  public Set<User> getAllPojos(List<Criterion> restrictions) {
+  public List<User> getAllPojos(List<Criterion> restrictions) {
     System.out.println("Getting all Users with Criteria");
     Session session = sessionFactory.getCurrentSession();
     Criteria crit = session.createCriteria(User.class);
     for (Criterion c : restrictions) {
       crit.add(c);
     }
-    Set<User> list = new TreeSet<User>(crit.list());
-    return list;
+    return (List<User>) crit.list();
   }
 
   @Override

@@ -1,8 +1,6 @@
 package com.revature.dao;
 
 import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
@@ -36,24 +34,22 @@ public class SwimLaneDaoImpl implements Dao<SwimLane> {
   }
 
   @Override
-  public Set<SwimLane> getAllPojos() {
+  public List<SwimLane> getAllPojos() {
     System.out.println("Getting all Swim Lanes");
     Session session = sessionFactory.getCurrentSession();
     Criteria crit = session.createCriteria(SwimLane.class);
-    Set<SwimLane> list = new TreeSet<SwimLane>(crit.list());
-    return list;
+    return (List<SwimLane>) crit.list();
   }
 
   @Override
-  public Set<SwimLane> getAllPojos(List<Criterion> restrictions) {
+  public List<SwimLane> getAllPojos(List<Criterion> restrictions) {
     System.out.println("Getting all Swim Lanes with Criteria");
     Session session = sessionFactory.getCurrentSession();
     Criteria crit = session.createCriteria(SwimLane.class);
     for (Criterion c : restrictions) {
       crit.add(c);
     }
-    Set<SwimLane> list = new TreeSet<SwimLane>(crit.list());
-    return list;
+    return (List<SwimLane>) crit.list();
   }
 
   @Override

@@ -1,15 +1,12 @@
 package com.revature.pojo;
 
 import java.io.Serializable;
-import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -32,23 +29,19 @@ public class Board implements Serializable {
   @Column(name = "B_DESCRIPTION")
   private String description;
 
-  @OneToMany(fetch = FetchType.EAGER)
-  private Set<SwimLane> swimLanes;
-
   public Board() {
   }
 
-  public Board(int id, String name, String description, Set<SwimLane> swimLanes) {
+  public Board(int id, String name, String description) {
     super();
     this.id = id;
     this.name = name;
     this.description = description;
-    this.swimLanes = swimLanes;
   }
 
   @Override
   public String toString() {
-    return "Board [id=" + id + ", name=" + name + ", description=" + description + ", swimLanes=" + swimLanes + "]";
+    return "Board [id=" + id + ", name=" + name + ", description=" + description + "]";
   }
 
   public int getId() {
@@ -73,14 +66,6 @@ public class Board implements Serializable {
 
   public void setDescription(String description) {
     this.description = description;
-  }
-
-  public Set<SwimLane> getSwimLanes() {
-    return swimLanes;
-  }
-
-  public void setSwimLanes(Set<SwimLane> swimLanes) {
-    this.swimLanes = swimLanes;
   }
 
 }

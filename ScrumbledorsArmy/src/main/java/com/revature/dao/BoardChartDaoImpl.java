@@ -1,8 +1,6 @@
 package com.revature.dao;
 
 import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
@@ -51,16 +49,15 @@ public class BoardChartDaoImpl implements Dao<BoardChart> {
   }
 
   @Override
-  public Set<BoardChart> getAllPojos() {
+  public List<BoardChart> getAllPojos() {
     System.out.println("Getting all Board Charts");
     Session session = sessionFactory.getCurrentSession();
     Criteria crit = session.createCriteria(BoardChart.class);
-    Set<BoardChart> charts = new TreeSet<BoardChart>(crit.list());
-    return charts;
+    return (List<BoardChart>) crit.list();
   }
 
   @Override
-  public Set<BoardChart> getAllPojos(List<Criterion> restrictions) {
+  public List<BoardChart> getAllPojos(List<Criterion> restrictions) {
     System.out.println("Getting all Burndown Charts with Criteria");
     Session session = sessionFactory.getCurrentSession();
     Criteria crit = session.createCriteria(BoardChart.class);
@@ -69,8 +66,7 @@ public class BoardChartDaoImpl implements Dao<BoardChart> {
       crit.add(c);
 
     }
-    Set<BoardChart> charts = new TreeSet<BoardChart>(crit.list());
-    return charts;
+    return (List<BoardChart>) crit.list();
   }
 
 }

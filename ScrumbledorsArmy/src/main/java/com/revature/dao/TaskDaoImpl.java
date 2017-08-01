@@ -1,8 +1,6 @@
 package com.revature.dao;
 
 import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
@@ -37,16 +35,15 @@ public class TaskDaoImpl implements Dao<Task> {
   }
 
   @Override
-  public Set<Task> getAllPojos() {
+  public List<Task> getAllPojos() {
     System.out.println("Getting all tasks");
     Session session = sessionFactory.getCurrentSession();
     Criteria crit = session.createCriteria(Task.class);
-    Set<Task> tasks = new TreeSet<Task>(crit.list());
-    return tasks;
+    return (List<Task>) crit.list();
   }
 
   @Override
-  public Set<Task> getAllPojos(List<Criterion> restrictions) {
+  public List<Task> getAllPojos(List<Criterion> restrictions) {
     System.out.println("Getting all Tasks with Criteria");
     Session session = sessionFactory.getCurrentSession();
     Criteria crit = session.createCriteria(Task.class);
@@ -55,8 +52,7 @@ public class TaskDaoImpl implements Dao<Task> {
       crit.add(c);
 
     }
-    Set<Task> tasks = new TreeSet<Task>(crit.list());
-    return tasks;
+    return (List<Task>) crit.list();
   }
 
   @Override
