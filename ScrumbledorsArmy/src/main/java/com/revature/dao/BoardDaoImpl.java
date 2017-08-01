@@ -20,22 +20,19 @@ public class BoardDaoImpl implements Dao<Board> {
   private SessionFactory sessionFactory;
 
   @Override
-  public void insert(Board obj) {
-    System.out.println("Inserting a Board");
+  public Integer insert(Board obj) {
     Session session = sessionFactory.getCurrentSession();
-    session.save(obj);
+    return (Integer) session.save(obj);
   }
 
   @Override
   public Board getPojoById(Board obj) {
-    System.out.println("Pulling a Board by ID");
     Session session = sessionFactory.getCurrentSession();
     return (Board) session.get(Board.class, obj.getId());
   }
 
   @Override
   public List<Board> getAllPojos() {
-    System.out.println("Getting all Boards");
     Session session = sessionFactory.getCurrentSession();
     Criteria crit = session.createCriteria(Board.class);
     return (List<Board>) crit.list();
@@ -43,7 +40,6 @@ public class BoardDaoImpl implements Dao<Board> {
 
   @Override
   public List<Board> getAllPojos(List<Criterion> restrictions) {
-    System.out.println("Getting all Boards with Criteria");
     Session session = sessionFactory.getCurrentSession();
     Criteria crit = session.createCriteria(Board.class);
     for (Criterion c : restrictions) {
@@ -56,14 +52,12 @@ public class BoardDaoImpl implements Dao<Board> {
 
   @Override
   public void update(Board obj) {
-    System.out.println("Updating a Board");
     Session session = sessionFactory.getCurrentSession();
     session.update(obj);
   }
 
   @Override
   public void delete(Board obj) {
-    System.out.println("Deleting a Board");
     Session session = sessionFactory.getCurrentSession();
     session.delete(obj);
   }

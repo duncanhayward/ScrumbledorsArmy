@@ -7,7 +7,7 @@ import org.hibernate.criterion.Criterion;
 public interface Dao<T> {
 
   // Create
-  public void insert(T obj);
+  public Integer insert(T obj);
 
   // Read
   public T getPojoById(T obj);

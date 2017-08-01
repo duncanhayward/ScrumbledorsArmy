@@ -20,29 +20,25 @@ public class BoardChartDaoImpl implements Dao<BoardChart> {
   private SessionFactory sessionFactory;
 
   @Override
-  public void insert(BoardChart obj) {
-    System.out.println("Inserting a Board Chart");
+  public Integer insert(BoardChart obj) {
     Session session = sessionFactory.getCurrentSession();
-    session.save(obj);
+    return (Integer) session.save(obj);
   }
 
   @Override
   public BoardChart getPojoById(BoardChart obj) {
-    System.out.println("Pulling a Board Chart by ID");
     Session session = sessionFactory.getCurrentSession();
     return (BoardChart) session.get(BoardChart.class, obj.getId());
   }
 
   @Override
   public void update(BoardChart obj) {
-    System.out.println("Updating a Board Chart");
     Session session = sessionFactory.getCurrentSession();
     session.update(obj);
   }
 
   @Override
   public void delete(BoardChart obj) {
-    System.out.println("Deleting a Board Chart");
     Session session = sessionFactory.getCurrentSession();
     session.delete(obj);
 
@@ -50,7 +46,6 @@ public class BoardChartDaoImpl implements Dao<BoardChart> {
 
   @Override
   public List<BoardChart> getAllPojos() {
-    System.out.println("Getting all Board Charts");
     Session session = sessionFactory.getCurrentSession();
     Criteria crit = session.createCriteria(BoardChart.class);
     return (List<BoardChart>) crit.list();
@@ -58,7 +53,6 @@ public class BoardChartDaoImpl implements Dao<BoardChart> {
 
   @Override
   public List<BoardChart> getAllPojos(List<Criterion> restrictions) {
-    System.out.println("Getting all Burndown Charts with Criteria");
     Session session = sessionFactory.getCurrentSession();
     Criteria crit = session.createCriteria(BoardChart.class);
     for (Criterion c : restrictions) {

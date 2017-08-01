@@ -20,22 +20,19 @@ public class UserDaoImpl implements Dao<User> {
   private SessionFactory sessionFactory;
 
   @Override
-  public void insert(User obj) {
-    System.out.println("Inserting User");
+  public Integer insert(User obj) {
     Session session = sessionFactory.getCurrentSession();
-    session.save(obj);
+    return (Integer) session.save(obj);
   }
 
   @Override
   public User getPojoById(User obj) {
-    System.out.println("Getting User");
     Session session = sessionFactory.getCurrentSession();
     return (User) session.get(User.class, obj.getId());
   }
 
   @Override
   public List<User> getAllPojos() {
-    System.out.println("Getting all Users");
     Session session = sessionFactory.getCurrentSession();
     Criteria crit = session.createCriteria(User.class);
     return (List<User>) crit.list();
@@ -43,7 +40,6 @@ public class UserDaoImpl implements Dao<User> {
 
   @Override
   public List<User> getAllPojos(List<Criterion> restrictions) {
-    System.out.println("Getting all Users with Criteria");
     Session session = sessionFactory.getCurrentSession();
     Criteria crit = session.createCriteria(User.class);
     for (Criterion c : restrictions) {
@@ -54,14 +50,12 @@ public class UserDaoImpl implements Dao<User> {
 
   @Override
   public void update(User obj) {
-    System.out.println("Updating User");
     Session session = sessionFactory.getCurrentSession();
     session.update(obj);
   }
 
   @Override
   public void delete(User obj) {
-    System.out.println("Deleting User");
     Session session = sessionFactory.getCurrentSession();
     session.delete(obj);
   }
