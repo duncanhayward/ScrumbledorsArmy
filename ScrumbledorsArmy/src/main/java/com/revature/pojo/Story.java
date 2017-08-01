@@ -2,13 +2,19 @@ package com.revature.pojo;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
-import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
+
 import javax.persistence.Table;
 
 @Entity
@@ -21,10 +27,12 @@ public class Story implements Serializable {
   private static final long serialVersionUID = 7483865353683469642L;
 
   @Id
+  @SequenceGenerator(name = "seq", sequenceName = "STORY_SEQ")
+  @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq")
   @Column(name = "S_ID")
   private int id;
   @ManyToOne
-  @Column(name = "SL_ID")
+  @JoinColumn(name = "SL_ID")
   private SwimLane swimLane;
   @Column(name = "S_POINTS")
   private int points;
@@ -39,14 +47,14 @@ public class Story implements Serializable {
   @Column(name = "S_DONE")
   private String done; // actual type is constrained char treated as boolean
 
-  @OneToMany(mappedBy = "id")
-  private List<Task> tasks;
+  @OneToMany(fetch = FetchType.EAGER)
+  private Set<Task> tasks;
 
   public Story() {
   }
 
   public Story(int id, SwimLane swimLane, int points, String description, Timestamp start, Timestamp endExpected,
-      Timestamp endActual, String done, List<Task> tasks) {
+      Timestamp endActual, String done, Set<Task> tasks) {
     super();
     this.id = id;
     this.swimLane = swimLane;
@@ -130,11 +138,11 @@ public class Story implements Serializable {
     this.done = done;
   }
 
-  public List<Task> getTasks() {
+  public Set<Task> getTasks() {
     return tasks;
   }
 
-  public void setTasks(List<Task> tasks) {
+  public void setTasks(Set<Task> tasks) {
     this.tasks = tasks;
   }
 

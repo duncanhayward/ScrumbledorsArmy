@@ -4,8 +4,12 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
@@ -18,10 +22,12 @@ public class Task implements Serializable {
   private static final long serialVersionUID = 5786947412418542399L;
 
   @Id
+  @SequenceGenerator(name = "seq", sequenceName = "TASK_SEQ")
+  @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq")
   @Column(name = "T_ID")
   private int id;
   @ManyToOne
-  @Column(name = "S_ID")
+  @JoinColumn(name = "S_ID")
   private Story story;
   @Column(name = "T_DESCRIPTION")
   private String description;
