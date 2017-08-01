@@ -1,8 +1,6 @@
 package com.revature.dao;
 
 import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
@@ -25,8 +23,14 @@ public class BoardRoleDaoImpl implements BoardRoleDao {
   private SessionFactory sessionFactory;
 
   @Override
-  public void insert(BoardRole obj) {
-    System.out.println("Inserting a Board Role");
+  @Deprecated
+  public Integer insert(BoardRole obj) {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  @Override
+  public void insertPojo(BoardRole obj) {
     Session session = sessionFactory.getCurrentSession();
     session.save(obj);
   }
@@ -40,37 +44,31 @@ public class BoardRoleDaoImpl implements BoardRoleDao {
 
   @Override
   public BoardRole getPojoByUserId(User obj) {
-    System.out.println("Pulling a Board Role by User ID");
     Session session = sessionFactory.getCurrentSession();
     return (BoardRole) session.get(BoardRole.class, obj.getId());
   }
 
   @Override
   public BoardRole getPojoByBoardId(Board obj) {
-    System.out.println("Pulling a Board Role by Board ID");
     Session session = sessionFactory.getCurrentSession();
     return (BoardRole) session.get(BoardRole.class, obj.getId());
   }
 
   @Override
   public BoardRole getPojoByRoleId(Role obj) {
-    System.out.println("Pulling a Board Role by Role ID");
     Session session = sessionFactory.getCurrentSession();
     return (BoardRole) session.get(BoardRole.class, obj.getId());
   }
 
   @Override
-  public Set<BoardRole> getAllPojos() {
-    System.out.println("Getting all Board Roles");
+  public List<BoardRole> getAllPojos() {
     Session session = sessionFactory.getCurrentSession();
     Criteria crit = session.createCriteria(BoardRole.class);
-    Set<BoardRole> roles = new TreeSet<BoardRole>(crit.list());
-    return roles;
+    return (List<BoardRole>) crit.list();
   }
 
   @Override
-  public Set<BoardRole> getAllPojos(List<Criterion> restrictions) {
-    System.out.println("Getting all Board Roles with Criteria");
+  public List<BoardRole> getAllPojos(List<Criterion> restrictions) {
     Session session = sessionFactory.getCurrentSession();
     Criteria crit = session.createCriteria(BoardRole.class);
     for (Criterion c : restrictions) {
@@ -78,20 +76,17 @@ public class BoardRoleDaoImpl implements BoardRoleDao {
       crit.add(c);
 
     }
-    Set<BoardRole> roles = new TreeSet<BoardRole>(crit.list());
-    return roles;
+    return (List<BoardRole>) crit.list();
   }
 
   @Override
   public void update(BoardRole obj) {
-    System.out.println("Updating a Board Role");
     Session session = sessionFactory.getCurrentSession();
     session.update(obj);
   }
 
   @Override
   public void delete(BoardRole obj) {
-    System.out.println("Deleting a Board Role");
     Session session = sessionFactory.getCurrentSession();
     session.delete(obj);
   }

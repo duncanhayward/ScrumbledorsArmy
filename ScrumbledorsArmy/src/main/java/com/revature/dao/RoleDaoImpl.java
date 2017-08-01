@@ -10,56 +10,54 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
-import com.revature.pojo.Task;
+import com.revature.pojo.Role;
 
 @Repository
 @Component
-public class TaskDaoImpl implements Dao<Task> {
+public class RoleDaoImpl implements Dao<Role> {
 
   @Autowired
   private SessionFactory sessionFactory;
 
   @Override
-  public Integer insert(Task obj) {
+  public Integer insert(Role obj) {
     Session session = sessionFactory.getCurrentSession();
     return (Integer) session.save(obj);
-
   }
 
   @Override
-  public Task getPojoById(Task obj) {
+  public Role getPojoById(Role obj) {
     Session session = sessionFactory.getCurrentSession();
-    return (Task) session.get(Task.class, obj.getId());
+    return (Role) session.get(Role.class, obj.getId());
   }
 
   @Override
-  public List<Task> getAllPojos() {
+  public List<Role> getAllPojos() {
     Session session = sessionFactory.getCurrentSession();
-    Criteria crit = session.createCriteria(Task.class);
-    return (List<Task>) crit.list();
+    Criteria crit = session.createCriteria(Role.class);
+    return (List<Role>) crit.list();
   }
 
   @Override
-  public List<Task> getAllPojos(List<Criterion> restrictions) {
+  public List<Role> getAllPojos(List<Criterion> restrictions) {
     Session session = sessionFactory.getCurrentSession();
-    Criteria crit = session.createCriteria(Task.class);
+    Criteria crit = session.createCriteria(Role.class);
     for (Criterion c : restrictions) {
 
       crit.add(c);
 
     }
-    return (List<Task>) crit.list();
+    return (List<Role>) crit.list();
   }
 
   @Override
-  public void update(Task obj) {
+  public void update(Role obj) {
     Session session = sessionFactory.getCurrentSession();
     session.update(obj);
-
   }
 
   @Override
-  public void delete(Task obj) {
+  public void delete(Role obj) {
     Session session = sessionFactory.getCurrentSession();
     session.delete(obj);
   }

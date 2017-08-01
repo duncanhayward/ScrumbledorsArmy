@@ -2,17 +2,14 @@ package com.revature.pojo;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
-import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -46,14 +43,11 @@ public class Story implements Serializable {
   @Column(name = "S_DONE")
   private String done; // actual type is constrained char treated as boolean
 
-  @OneToMany(fetch = FetchType.EAGER)
-  private Set<Task> tasks;
-
   public Story() {
   }
 
   public Story(int id, SwimLane swimLane, int points, String description, Timestamp start, Timestamp endExpected,
-      Timestamp endActual, String done, Set<Task> tasks) {
+      Timestamp endActual, String done) {
     super();
     this.id = id;
     this.swimLane = swimLane;
@@ -63,14 +57,12 @@ public class Story implements Serializable {
     this.endExpected = endExpected;
     this.endActual = endActual;
     this.done = done;
-    this.tasks = tasks;
   }
 
   @Override
   public String toString() {
     return "Story [id=" + id + ", swimLane=" + swimLane + ", points=" + points + ", description=" + description
-        + ", start=" + start + ", endExpected=" + endExpected + ", endActual=" + endActual + ", done=" + done
-        + ", tasks=" + tasks + "]";
+        + ", start=" + start + ", endExpected=" + endExpected + ", endActual=" + endActual + ", done=" + done + "]";
   }
 
   public int getId() {
@@ -135,14 +127,6 @@ public class Story implements Serializable {
 
   public void setDone(String done) {
     this.done = done;
-  }
-
-  public Set<Task> getTasks() {
-    return tasks;
-  }
-
-  public void setTasks(Set<Task> tasks) {
-    this.tasks = tasks;
   }
 
 }

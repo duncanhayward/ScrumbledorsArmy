@@ -7,6 +7,8 @@ import com.revature.pojo.User;
 
 public interface BoardRoleDao extends Dao<BoardRole> {
 
+  public void insertPojo(BoardRole obj);
+
   public BoardRole getPojoByUserId(User obj);
 
   public BoardRole getPojoByBoardId(Board obj);

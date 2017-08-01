@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- configure the spring container -->
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:mvc="http://www.springframework.org/schema/mvc"
-	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:tx="http://www.springframework.org/schema/tx"
 	xmlns:aop="http://www.springframework.org/schema/aop"
 	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.2.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
@@ -21,10 +19,9 @@
 	<bean id="myDataSource" class="org.apache.commons.dbcp.BasicDataSource">
 		<!-- Setter DI of Username, pw, URL, Driver -->
 		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"></property>
-		<property name="username" value="aws_bank_db"></property>
-		<property name="password" value="321June}"></property>
-		<property name="url"
-			value="jdbc:oracle:thin:@//octocat.cjx2iyo8y1oj.us-east-2.rds.amazonaws.com:1521/ORCL"></property>
+		<property name="username" value="aws_scrum_local"></property>
+		<property name="password" value="P4SSW0RD"></property>
+		<property name="url" value="jdbc:oracle:thin:@localhost:1521:xe"></property>
 	</bean>
 
 	<!-- Now give that DataSource object to the SessionFactory -->
@@ -38,7 +35,6 @@
 			<props>
 				<prop key="hibernate.dialect">org.hibernate.dialect.Oracle10gDialect</prop>
 				<prop key="hibernate.show_sql">true</prop>
-				<prop key="hibernate.hbm2ddl.auto">none</prop>
 			</props>
 		</property>
 

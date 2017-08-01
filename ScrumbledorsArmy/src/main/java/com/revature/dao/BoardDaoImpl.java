@@ -1,9 +1,6 @@
 package com.revature.dao;
 
-import java.util.Comparator;
 import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
@@ -17,37 +14,32 @@ import com.revature.pojo.Board;
 
 @Repository
 @Component
-public class BoardDaoImpl implements Dao<Board>, Comparator<Board> {
+public class BoardDaoImpl implements Dao<Board> {
 
   @Autowired
   private SessionFactory sessionFactory;
 
   @Override
-  public void insert(Board obj) {
-    System.out.println("Inserting a Board");
+  public Integer insert(Board obj) {
     Session session = sessionFactory.getCurrentSession();
-    session.save(obj);
+    return (Integer) session.save(obj);
   }
 
   @Override
   public Board getPojoById(Board obj) {
-    System.out.println("Pulling a Board by ID");
     Session session = sessionFactory.getCurrentSession();
     return (Board) session.get(Board.class, obj.getId());
   }
 
   @Override
-  public Set<Board> getAllPojos() {
-    System.out.println("Getting all Boards");
+  public List<Board> getAllPojos() {
     Session session = sessionFactory.getCurrentSession();
     Criteria crit = session.createCriteria(Board.class);
-    Set<Board> boards = new TreeSet<Board>(crit.list());
-    return boards;
+    return (List<Board>) crit.list();
   }
 
   @Override
-  public Set<Board> getAllPojos(List<Criterion> restrictions) {
-    System.out.println("Getting all Boards with Criteria");
+  public List<Board> getAllPojos(List<Criterion> restrictions) {
     Session session = sessionFactory.getCurrentSession();
     Criteria crit = session.createCriteria(Board.class);
     for (Criterion c : restrictions) {
@@ -55,27 +47,19 @@ public class BoardDaoImpl implements Dao<Board>, Comparator<Board> {
       crit.add(c);
 
     }
-    Set<Board> boards = new TreeSet<Board>(crit.list());
-    return boards;
+    return (List<Board>) crit.list();
   }
 
   @Override
   public void update(Board obj) {
-    System.out.println("Updating a Board");
     Session session = sessionFactory.getCurrentSession();
     session.update(obj);
   }
 
   @Override
   public void delete(Board obj) {
-    System.out.println("Deleting a Board");
     Session session = sessionFactory.getCurrentSession();
     session.delete(obj);
-  }
-
-  @Override
-  public int compare(Board o1, Board o2) {
-    return o1.getId() - o2.getId();
   }
 
 }
