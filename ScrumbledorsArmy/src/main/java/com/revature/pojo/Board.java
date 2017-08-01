@@ -1,11 +1,11 @@
 package com.revature.pojo;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Column;
-import javax.persistence.Embeddable;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -14,7 +14,6 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
-@Embeddable
 @Table(name = "BOARD")
 public class Board implements Serializable {
 
@@ -33,13 +32,13 @@ public class Board implements Serializable {
   @Column(name = "B_DESCRIPTION")
   private String description;
 
-  @OneToMany(mappedBy = "id")
-  private List<SwimLane> swimLanes;
+  @OneToMany(fetch = FetchType.EAGER)
+  private Set<SwimLane> swimLanes;
 
   public Board() {
   }
 
-  public Board(int id, String name, String description, List<SwimLane> swimLanes) {
+  public Board(int id, String name, String description, Set<SwimLane> swimLanes) {
     super();
     this.id = id;
     this.name = name;
@@ -76,11 +75,11 @@ public class Board implements Serializable {
     this.description = description;
   }
 
-  public List<SwimLane> getSwimLanes() {
+  public Set<SwimLane> getSwimLanes() {
     return swimLanes;
   }
 
-  public void setSwimLanes(List<SwimLane> swimLanes) {
+  public void setSwimLanes(Set<SwimLane> swimLanes) {
     this.swimLanes = swimLanes;
   }
 

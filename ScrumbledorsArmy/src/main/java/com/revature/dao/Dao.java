@@ -1,6 +1,7 @@
 package com.revature.dao;
 
 import java.util.List;
+import java.util.Set;
 
 import org.hibernate.criterion.Criterion;
 
@@ -12,9 +13,9 @@ public interface Dao<T> {
   // Read
   public T getPojoById(T obj);
 
-  public List<T> getAllPojos();
+  public Set<T> getAllPojos();
 
-  public List<T> getAllPojos(List<Criterion> restrictions);
+  public Set<T> getAllPojos(List<Criterion> restrictions);
 
   // Update
   public void update(T obj);

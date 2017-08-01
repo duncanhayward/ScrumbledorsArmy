@@ -12,60 +12,62 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
-import com.revature.pojo.User;
+import com.revature.pojo.Log;
 
 @Repository
 @Component
-public class UserDaoImpl implements Dao<User> {
-
+public class LogDaoImpl implements Dao<Log> {
+  
   @Autowired
   private SessionFactory sessionFactory;
 
   @Override
-  public void insert(User obj) {
-    System.out.println("Inserting User");
+  public void insert(Log obj) {
+    System.out.println("Inserting a Log");
     Session session = sessionFactory.getCurrentSession();
     session.save(obj);
   }
 
   @Override
-  public User getPojoById(User obj) {
-    System.out.println("Getting User");
+  public Log getPojoById(Log obj) {
+    System.out.println("Pulling a Story by ID");
     Session session = sessionFactory.getCurrentSession();
-    return (User) session.get(User.class, obj.getId());
+    return (Log) session.get(Log.class, obj.getId());
   }
 
   @Override
-  public Set<User> getAllPojos() {
-    System.out.println("Getting all Users");
+  public Set<Log> getAllPojos() {
+    System.out.println("Getting all Logs");
     Session session = sessionFactory.getCurrentSession();
-    Criteria crit = session.createCriteria(User.class);
-    Set<User> list = new TreeSet<User>(crit.list());
-    return list;
+    Criteria crit = session.createCriteria(Log.class);
+    Set<Log> logs = new TreeSet<Log>(crit.list());
+    return logs;
   }
 
   @Override
-  public Set<User> getAllPojos(List<Criterion> restrictions) {
-    System.out.println("Getting all Users with Criteria");
+  public Set<Log> getAllPojos(List<Criterion> restrictions) {
+    System.out.println("Getting all Logs with Criteria");
     Session session = sessionFactory.getCurrentSession();
-    Criteria crit = session.createCriteria(User.class);
+    Criteria crit = session.createCriteria(Log.class);
     for (Criterion c : restrictions) {
+
       crit.add(c);
+
     }
-    Set<User> list = new TreeSet<User>(crit.list());
-    return list;
+    Set<Log> logs = new TreeSet<Log>(crit.list());
+    return logs;
   }
 
   @Override
-  public void update(User obj) {
-    System.out.println("Updating User");
+  public void update(Log obj) {
+    System.out.println("Updating a Log");
     Session session = sessionFactory.getCurrentSession();
     session.update(obj);
   }
 
   @Override
-  public void delete(User obj) {
-    System.out.println("Deleting User");
+  public void delete(Log obj) {
+    System.out.println("Deleting a Log");
     Session session = sessionFactory.getCurrentSession();
     session.delete(obj);
   }

@@ -12,60 +12,60 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
-import com.revature.pojo.User;
+import com.revature.pojo.SwimLane;
 
 @Repository
 @Component
-public class UserDaoImpl implements Dao<User> {
+public class SwimLaneDaoImpl implements Dao<SwimLane> {
 
   @Autowired
   private SessionFactory sessionFactory;
 
   @Override
-  public void insert(User obj) {
-    System.out.println("Inserting User");
+  public void insert(SwimLane obj) {
+    System.out.println("Inserting Swim Lane");
     Session session = sessionFactory.getCurrentSession();
     session.save(obj);
   }
 
   @Override
-  public User getPojoById(User obj) {
-    System.out.println("Getting User");
+  public SwimLane getPojoById(SwimLane obj) {
+    System.out.println("Getting Swim Lane");
     Session session = sessionFactory.getCurrentSession();
-    return (User) session.get(User.class, obj.getId());
+    return (SwimLane) session.get(SwimLane.class, obj.getId());
   }
 
   @Override
-  public Set<User> getAllPojos() {
-    System.out.println("Getting all Users");
+  public Set<SwimLane> getAllPojos() {
+    System.out.println("Getting all Swim Lanes");
     Session session = sessionFactory.getCurrentSession();
-    Criteria crit = session.createCriteria(User.class);
-    Set<User> list = new TreeSet<User>(crit.list());
+    Criteria crit = session.createCriteria(SwimLane.class);
+    Set<SwimLane> list = new TreeSet<SwimLane>(crit.list());
     return list;
   }
 
   @Override
-  public Set<User> getAllPojos(List<Criterion> restrictions) {
-    System.out.println("Getting all Users with Criteria");
+  public Set<SwimLane> getAllPojos(List<Criterion> restrictions) {
+    System.out.println("Getting all Swim Lanes with Criteria");
     Session session = sessionFactory.getCurrentSession();
-    Criteria crit = session.createCriteria(User.class);
+    Criteria crit = session.createCriteria(SwimLane.class);
     for (Criterion c : restrictions) {
       crit.add(c);
     }
-    Set<User> list = new TreeSet<User>(crit.list());
+    Set<SwimLane> list = new TreeSet<SwimLane>(crit.list());
     return list;
   }
 
   @Override
-  public void update(User obj) {
-    System.out.println("Updating User");
+  public void update(SwimLane obj) {
+    System.out.println("Updating Swim Lane");
     Session session = sessionFactory.getCurrentSession();
     session.update(obj);
   }
 
   @Override
-  public void delete(User obj) {
-    System.out.println("Deleting User");
+  public void delete(SwimLane obj) {
+    System.out.println("Deleting Swim Lane");
     Session session = sessionFactory.getCurrentSession();
     session.delete(obj);
   }

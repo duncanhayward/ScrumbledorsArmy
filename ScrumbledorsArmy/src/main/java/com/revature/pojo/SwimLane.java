@@ -1,13 +1,15 @@
 package com.revature.pojo;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
@@ -28,20 +30,20 @@ public class SwimLane implements Serializable {
   @Column(name = "SL_ID")
   private int id;
   @ManyToOne
-  @Column(name = "B_ID")
+  @JoinColumn(name = "B_ID")
   private Board board;
   @Column(name = "SL_NAME")
   private String name;
   @Column(name = "SL_ORDER")
   private int order;
 
-  @OneToMany(mappedBy = "id")
-  private List<Story> stories;
+  @OneToMany(fetch = FetchType.EAGER)
+  private Set<Story> stories;
 
   public SwimLane() {
   }
 
-  public SwimLane(int id, Board board, String name, int order, List<Story> stories) {
+  public SwimLane(int id, Board board, String name, int order, Set<Story> stories) {
     super();
     this.id = id;
     this.board = board;
@@ -88,11 +90,11 @@ public class SwimLane implements Serializable {
     this.order = order;
   }
 
-  public List<Story> getStories() {
+  public Set<Story> getStories() {
     return stories;
   }
 
-  public void setStories(List<Story> stories) {
+  public void setStories(Set<Story> stories) {
     this.stories = stories;
   }
 

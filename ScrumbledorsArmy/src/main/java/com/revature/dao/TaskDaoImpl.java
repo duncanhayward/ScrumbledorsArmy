@@ -12,60 +12,64 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
-import com.revature.pojo.User;
+import com.revature.pojo.Task;
 
 @Repository
 @Component
-public class UserDaoImpl implements Dao<User> {
+public class TaskDaoImpl implements Dao<Task> {
 
   @Autowired
   private SessionFactory sessionFactory;
 
   @Override
-  public void insert(User obj) {
-    System.out.println("Inserting User");
+  public void insert(Task obj) {
+    System.out.println("Inserting Task");
     Session session = sessionFactory.getCurrentSession();
     session.save(obj);
+
   }
 
   @Override
-  public User getPojoById(User obj) {
-    System.out.println("Getting User");
+  public Task getPojoById(Task obj) {
+    System.out.println("Getting Task");
     Session session = sessionFactory.getCurrentSession();
-    return (User) session.get(User.class, obj.getId());
+    return (Task) session.get(Task.class, obj.getId());
   }
 
   @Override
-  public Set<User> getAllPojos() {
-    System.out.println("Getting all Users");
+  public Set<Task> getAllPojos() {
+    System.out.println("Getting all tasks");
     Session session = sessionFactory.getCurrentSession();
-    Criteria crit = session.createCriteria(User.class);
-    Set<User> list = new TreeSet<User>(crit.list());
-    return list;
+    Criteria crit = session.createCriteria(Task.class);
+    Set<Task> tasks = new TreeSet<Task>(crit.list());
+    return tasks;
   }
 
   @Override
-  public Set<User> getAllPojos(List<Criterion> restrictions) {
-    System.out.println("Getting all Users with Criteria");
+  public Set<Task> getAllPojos(List<Criterion> restrictions) {
+    System.out.println("Getting all Tasks with Criteria");
     Session session = sessionFactory.getCurrentSession();
-    Criteria crit = session.createCriteria(User.class);
+    Criteria crit = session.createCriteria(Task.class);
     for (Criterion c : restrictions) {
+
       crit.add(c);
+
     }
-    Set<User> list = new TreeSet<User>(crit.list());
-    return list;
+    Set<Task> tasks = new TreeSet<Task>(crit.list());
+    return tasks;
   }
 
   @Override
-  public void update(User obj) {
-    System.out.println("Updating User");
+  public void update(Task obj) {
+    System.out.println("Updating Task");
     Session session = sessionFactory.getCurrentSession();
     session.update(obj);
+
   }
 
   @Override
-  public void delete(User obj) {
-    System.out.println("Deleting User");
+  public void delete(Task obj) {
+    System.out.println("Deleating Task");
     Session session = sessionFactory.getCurrentSession();
     session.delete(obj);
   }
