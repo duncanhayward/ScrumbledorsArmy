@@ -13,7 +13,6 @@ import org.springframework.stereotype.Repository;
 import com.revature.pojo.Role;
 
 @Repository
-@Component
 public class RoleDaoImpl implements Dao<Role> {
 
   @Autowired

@@ -2,4 +2,34 @@
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" version="3.1">
   <display-name>ScrumbledorsArmy</display-name>
   <!-- no need for a welcome file list with Spring mvc -->
+  
+  <!-- modeled after AngularTodo-Client-Template web.xml -->
+  <!-- Map the front controller of Spring -->
+	<servlet>
+		<servlet-name>SpringServlet</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<!-- init-param refers to ServletConfig setting an environment variable 
+			for a single servlet -->
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>/WEB-INF/beans.xml</param-value>
+		</init-param>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>SpringServlet</servlet-name>
+		<url-pattern>/</url-pattern>	<!-- avoid hitting your front controller when using static resource endpoints -->
+	</servlet-mapping>
+	
+	<!-- listen to start the container: applicationContext -->
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+	
+	<!-- 
+		ServletContext - environment variables for ALL Servlets
+	 -->
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>/WEB-INF/beans.xml</param-value>
+	</context-param>
 </web-app>

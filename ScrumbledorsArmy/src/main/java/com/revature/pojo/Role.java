@@ -11,7 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-@Embeddable
+@Entity
 @Table(name = "ROLE")
 public class Role implements Serializable {
 

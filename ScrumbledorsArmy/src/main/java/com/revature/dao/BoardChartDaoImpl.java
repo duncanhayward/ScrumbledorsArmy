@@ -13,7 +13,6 @@ import org.springframework.stereotype.Repository;
 import com.revature.pojo.BoardChart;
 
 @Repository
-@Component
 public class BoardChartDaoImpl implements Dao<BoardChart> {
 
   @Autowired

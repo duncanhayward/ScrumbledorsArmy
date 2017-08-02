@@ -13,7 +13,6 @@ import org.springframework.stereotype.Repository;
 import com.revature.pojo.Log;
 
 @Repository
-@Component
 public class LogDaoImpl implements Dao<Log> {
   
   @Autowired

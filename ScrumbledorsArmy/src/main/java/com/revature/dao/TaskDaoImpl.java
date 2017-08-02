@@ -13,7 +13,6 @@ import org.springframework.stereotype.Repository;
 import com.revature.pojo.Task;
 
 @Repository
-@Component
 public class TaskDaoImpl implements Dao<Task> {
 
   @Autowired

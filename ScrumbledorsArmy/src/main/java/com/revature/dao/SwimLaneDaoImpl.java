@@ -13,7 +13,6 @@ import org.springframework.stereotype.Repository;
 import com.revature.pojo.SwimLane;
 
 @Repository
-@Component
 public class SwimLaneDaoImpl implements Dao<SwimLane> {
 
   @Autowired

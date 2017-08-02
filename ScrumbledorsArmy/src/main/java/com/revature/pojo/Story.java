@@ -5,6 +5,7 @@ import java.sql.Timestamp;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -27,19 +28,26 @@ public class Story implements Serializable {
   @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq")
   @Column(name = "S_ID")
   private int id;
-  @ManyToOne
+  
+  @ManyToOne(fetch=FetchType.LAZY)
   @JoinColumn(name = "SL_ID")
   private SwimLane swimLane;
+  
   @Column(name = "S_POINTS")
   private int points;
+  
   @Column(name = "S_DESCRIPTION")
   private String description;
+  
   @Column(name = "S_START")
   private Timestamp start;
+  
   @Column(name = "S_END_EXPECTED")
   private Timestamp endExpected;
+  
   @Column(name = "S_END_ACTUAL")
   private Timestamp endActual;
+  
   @Column(name = "S_DONE")
   private String done; // actual type is constrained char treated as boolean
 

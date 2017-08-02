@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -26,11 +27,14 @@ public class Task implements Serializable {
   @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq")
   @Column(name = "T_ID")
   private int id;
-  @ManyToOne
+  
+  @ManyToOne(fetch=FetchType.LAZY)
   @JoinColumn(name = "S_ID")
   private Story story;
+  
   @Column(name = "T_DESCRIPTION")
   private String description;
+  
   @Column(name = "T_DONE")
   private String done; // actual type is constrained char treated as boolean
 

@@ -13,7 +13,6 @@ import org.springframework.stereotype.Repository;
 import com.revature.pojo.Board;
 
 @Repository
-@Component
 public class BoardDaoImpl implements Dao<Board> {
 
   @Autowired

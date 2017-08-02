@@ -13,7 +13,6 @@ import org.springframework.stereotype.Repository;
 import com.revature.pojo.User;
 
 @Repository
-@Component
 public class UserDaoImpl implements Dao<User> {
 
   @Autowired

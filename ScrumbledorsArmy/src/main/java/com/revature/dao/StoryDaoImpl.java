@@ -13,7 +13,6 @@ import org.springframework.stereotype.Repository;
 import com.revature.pojo.Story;
 
 @Repository
-@Component
 public class StoryDaoImpl implements Dao<Story> {
 
   @Autowired

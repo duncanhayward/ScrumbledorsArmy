@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -26,11 +27,14 @@ public class SwimLane implements Serializable {
   @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq")
   @Column(name = "SL_ID")
   private int id;
-  @ManyToOne
+  
+  @ManyToOne(fetch=FetchType.LAZY)
   @JoinColumn(name = "B_ID")
   private Board board;
+  
   @Column(name = "SL_NAME")
   private String name;
+  
   @Column(name = "SL_ORDER")
   private int order;
 
