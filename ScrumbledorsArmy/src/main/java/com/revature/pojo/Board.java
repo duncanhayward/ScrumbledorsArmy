@@ -1,82 +1,86 @@
 package com.revature.pojo;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.ArrayList;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 @Entity
-@Embeddable
 @Table(name = "BOARD")
 public class Board implements Serializable {
 
-  /**
-   * 
-   */
-  private static final long serialVersionUID = -4734100175726060405L;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4734100175726060405L;
 
-  @Id
-  @Column(name = "B_ID")
-  private int id;
-  @Column(name = "B_NAME")
-  private String name;
-  @Column(name = "B_DESCRIPTION")
-  private String description;
+	@Id
+	@SequenceGenerator(name = "seq", sequenceName = "BOARD_SEQ")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq")
 
-  @OneToMany(mappedBy = "id")
-  private List<SwimLane> swimLanes;
+	@Column(name = "B_ID")
+	private int id;
 
-  public Board() {
-  }
+	@Column(name = "B_NAME")
+	private String name;
 
-  public Board(int id, String name, String description, List<SwimLane> swimLanes) {
-    super();
-    this.id = id;
-    this.name = name;
-    this.description = description;
-    this.swimLanes = swimLanes;
-  }
+	@Column(name = "B_DESCRIPTION")
+	private String description;
+	
+//	@OneToMany(mappedBy="B_ID", fetch = FetchType.EAGER)
+//	@Fetch(value=FetchMode.SELECT)
+//	private ArrayList<SwimLane> swimLanes;
 
-  @Override
-  public String toString() {
-    return "Board [id=" + id + ", name=" + name + ", description=" + description + ", swimLanes=" + swimLanes + "]";
-  }
+	public Board() {
+	}
 
-  public int getId() {
-    return id;
-  }
+	public Board(int id, String name, String description) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.description = description;
+	}
 
-  public void setId(int id) {
-    this.id = id;
-  }
+	@Override
+	public String toString() {
+		return "Board [id=" + id + ", name=" + name + ", description=" + description + "]";
+	}
 
-  public String getName() {
-    return name;
-  }
+	public int getId() {
+		return id;
+	}
 
-  public void setName(String name) {
-    this.name = name;
-  }
+	public void setId(int id) {
+		this.id = id;
+	}
 
-  public String getDescription() {
-    return description;
-  }
+	public String getName() {
+		return name;
+	}
 
-  public void setDescription(String description) {
-    this.description = description;
-  }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-  public List<SwimLane> getSwimLanes() {
-    return swimLanes;
-  }
+	public String getDescription() {
+		return description;
+	}
 
-  public void setSwimLanes(List<SwimLane> swimLanes) {
-    this.swimLanes = swimLanes;
-  }
+	public void setDescription(String description) {
+		this.description = description;
+	}
 
 }

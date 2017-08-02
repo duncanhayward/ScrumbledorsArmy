@@ -5,7 +5,12 @@ import java.sql.Timestamp;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
@@ -18,14 +23,21 @@ public class BoardChart implements Serializable {
   private static final long serialVersionUID = 676631759009182870L;
 
   @Id
+  @SequenceGenerator(name = "seq", sequenceName = "CHART_SEQ")
+  @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq")
   @Column(name = "BD_ID")
   private int id;
-  @Column(name = "B_ID")
+  
+  @ManyToOne
+  @JoinColumn(name = "B_ID")
   private Board board;
+  
   @Column(name = "BD_START")
   private Timestamp start;
+  
   @Column(name = "BD_END")
   private Timestamp end;
+  
   @Column(name = "BD_NAME")
   private String name;
 
