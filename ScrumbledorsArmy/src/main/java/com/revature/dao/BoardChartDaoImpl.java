@@ -10,55 +10,56 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
-import com.revature.pojo.Board;
+import com.revature.pojo.BoardChart;
 
 @Repository
-public class BoardDaoImpl implements Dao<Board> {
+public class BoardChartDaoImpl implements Dao<BoardChart> {
 
   @Autowired
   private SessionFactory sessionFactory;
 
   @Override
-  public Integer insert(Board obj) {
+  public Integer insert(BoardChart obj) {
     Session session = sessionFactory.getCurrentSession();
     return (Integer) session.save(obj);
   }
 
   @Override
-  public Board getPojoById(Board obj) {
+  public BoardChart getPojoById(BoardChart obj) {
     Session session = sessionFactory.getCurrentSession();
-    return (Board) session.get(Board.class, obj.getId());
+    return (BoardChart) session.get(BoardChart.class, obj.getId());
   }
 
   @Override
-  public List<Board> getAllPojos() {
-    Session session = sessionFactory.getCurrentSession();
-    Criteria crit = session.createCriteria(Board.class);
-    return (List<Board>) crit.list();
-  }
-
-  @Override
-  public List<Board> getAllPojos(List<Criterion> restrictions) {
-    Session session = sessionFactory.getCurrentSession();
-    Criteria crit = session.createCriteria(Board.class);
-    for (Criterion c : restrictions) {
-
-      crit.add(c);
-
-    }
-    return (List<Board>) crit.list();
-  }
-
-  @Override
-  public void update(Board obj) {
+  public void update(BoardChart obj) {
     Session session = sessionFactory.getCurrentSession();
     session.update(obj);
   }
 
   @Override
-  public void delete(Board obj) {
+  public void delete(BoardChart obj) {
     Session session = sessionFactory.getCurrentSession();
     session.delete(obj);
+
+  }
+
+  @Override
+  public List<BoardChart> getAllPojos() {
+    Session session = sessionFactory.getCurrentSession();
+    Criteria crit = session.createCriteria(BoardChart.class);
+    return (List<BoardChart>) crit.list();
+  }
+
+  @Override
+  public List<BoardChart> getAllPojos(List<Criterion> restrictions) {
+    Session session = sessionFactory.getCurrentSession();
+    Criteria crit = session.createCriteria(BoardChart.class);
+    for (Criterion c : restrictions) {
+
+      crit.add(c);
+
+    }
+    return (List<BoardChart>) crit.list();
   }
 
 }

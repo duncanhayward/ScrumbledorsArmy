@@ -10,53 +10,51 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
-import com.revature.pojo.Board;
+import com.revature.pojo.SwimLane;
 
 @Repository
-public class BoardDaoImpl implements Dao<Board> {
+public class SwimLaneDaoImpl implements Dao<SwimLane> {
 
   @Autowired
   private SessionFactory sessionFactory;
 
   @Override
-  public Integer insert(Board obj) {
+  public Integer insert(SwimLane obj) {
     Session session = sessionFactory.getCurrentSession();
     return (Integer) session.save(obj);
   }
 
   @Override
-  public Board getPojoById(Board obj) {
+  public SwimLane getPojoById(SwimLane obj) {
     Session session = sessionFactory.getCurrentSession();
-    return (Board) session.get(Board.class, obj.getId());
+    return (SwimLane) session.get(SwimLane.class, obj.getId());
   }
 
   @Override
-  public List<Board> getAllPojos() {
+  public List<SwimLane> getAllPojos() {
     Session session = sessionFactory.getCurrentSession();
-    Criteria crit = session.createCriteria(Board.class);
-    return (List<Board>) crit.list();
+    Criteria crit = session.createCriteria(SwimLane.class);
+    return (List<SwimLane>) crit.list();
   }
 
   @Override
-  public List<Board> getAllPojos(List<Criterion> restrictions) {
+  public List<SwimLane> getAllPojos(List<Criterion> restrictions) {
     Session session = sessionFactory.getCurrentSession();
-    Criteria crit = session.createCriteria(Board.class);
+    Criteria crit = session.createCriteria(SwimLane.class);
     for (Criterion c : restrictions) {
-
       crit.add(c);
-
     }
-    return (List<Board>) crit.list();
+    return (List<SwimLane>) crit.list();
   }
 
   @Override
-  public void update(Board obj) {
+  public void update(SwimLane obj) {
     Session session = sessionFactory.getCurrentSession();
     session.update(obj);
   }
 
   @Override
-  public void delete(Board obj) {
+  public void delete(SwimLane obj) {
     Session session = sessionFactory.getCurrentSession();
     session.delete(obj);
   }

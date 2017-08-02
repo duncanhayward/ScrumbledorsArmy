@@ -10,53 +10,53 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
-import com.revature.pojo.Board;
+import com.revature.pojo.Story;
 
 @Repository
-public class BoardDaoImpl implements Dao<Board> {
+public class StoryDaoImpl implements Dao<Story> {
 
   @Autowired
   private SessionFactory sessionFactory;
 
   @Override
-  public Integer insert(Board obj) {
+  public Integer insert(Story obj) {
     Session session = sessionFactory.getCurrentSession();
     return (Integer) session.save(obj);
   }
 
   @Override
-  public Board getPojoById(Board obj) {
+  public Story getPojoById(Story obj) {
     Session session = sessionFactory.getCurrentSession();
-    return (Board) session.get(Board.class, obj.getId());
+    return (Story) session.get(Story.class, obj.getId());
   }
 
   @Override
-  public List<Board> getAllPojos() {
+  public List<Story> getAllPojos() {
     Session session = sessionFactory.getCurrentSession();
-    Criteria crit = session.createCriteria(Board.class);
-    return (List<Board>) crit.list();
+    Criteria crit = session.createCriteria(Story.class);
+    return (List<Story>) crit.list();
   }
 
   @Override
-  public List<Board> getAllPojos(List<Criterion> restrictions) {
+  public List<Story> getAllPojos(List<Criterion> restrictions) {
     Session session = sessionFactory.getCurrentSession();
-    Criteria crit = session.createCriteria(Board.class);
+    Criteria crit = session.createCriteria(Story.class);
     for (Criterion c : restrictions) {
 
       crit.add(c);
 
     }
-    return (List<Board>) crit.list();
+    return (List<Story>) crit.list();
   }
 
   @Override
-  public void update(Board obj) {
+  public void update(Story obj) {
     Session session = sessionFactory.getCurrentSession();
     session.update(obj);
   }
 
   @Override
-  public void delete(Board obj) {
+  public void delete(Story obj) {
     Session session = sessionFactory.getCurrentSession();
     session.delete(obj);
   }

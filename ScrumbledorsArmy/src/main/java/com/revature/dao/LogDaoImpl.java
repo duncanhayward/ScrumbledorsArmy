@@ -10,53 +10,53 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
-import com.revature.pojo.Board;
+import com.revature.pojo.Log;
 
 @Repository
-public class BoardDaoImpl implements Dao<Board> {
-
+public class LogDaoImpl implements Dao<Log> {
+  
   @Autowired
   private SessionFactory sessionFactory;
 
   @Override
-  public Integer insert(Board obj) {
+  public Integer insert(Log obj) {
     Session session = sessionFactory.getCurrentSession();
     return (Integer) session.save(obj);
   }
 
   @Override
-  public Board getPojoById(Board obj) {
+  public Log getPojoById(Log obj) {
     Session session = sessionFactory.getCurrentSession();
-    return (Board) session.get(Board.class, obj.getId());
+    return (Log) session.get(Log.class, obj.getId());
   }
 
   @Override
-  public List<Board> getAllPojos() {
+  public List<Log> getAllPojos() {
     Session session = sessionFactory.getCurrentSession();
-    Criteria crit = session.createCriteria(Board.class);
-    return (List<Board>) crit.list();
+    Criteria crit = session.createCriteria(Log.class);
+    return (List<Log>) crit.list();
   }
 
   @Override
-  public List<Board> getAllPojos(List<Criterion> restrictions) {
+  public List<Log> getAllPojos(List<Criterion> restrictions) {
     Session session = sessionFactory.getCurrentSession();
-    Criteria crit = session.createCriteria(Board.class);
+    Criteria crit = session.createCriteria(Log.class);
     for (Criterion c : restrictions) {
 
       crit.add(c);
 
     }
-    return (List<Board>) crit.list();
+    return (List<Log>) crit.list();
   }
 
   @Override
-  public void update(Board obj) {
+  public void update(Log obj) {
     Session session = sessionFactory.getCurrentSession();
     session.update(obj);
   }
 
   @Override
-  public void delete(Board obj) {
+  public void delete(Log obj) {
     Session session = sessionFactory.getCurrentSession();
     session.delete(obj);
   }
