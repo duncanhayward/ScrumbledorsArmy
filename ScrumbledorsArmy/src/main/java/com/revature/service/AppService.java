@@ -10,24 +10,21 @@ import com.revature.dao.Dao;
 import com.revature.pojo.Board;
 import com.revature.pojo.User;
 
-@Service(value = "AppService")
-@Transactional
-public class AppService {
 
-  @Autowired
-  private Dao<User> userDao;
-  @Autowired
-  private Dao<Board> boardDao;
+public interface AppService {
 
-  public User getUserById(User user) {
-    return userDao.getPojoById(user);
-  }
+	public User getUser(User user);
 
-  public Board getBoardById(Board board) {
-    return boardDao.getPojoById(board);
-  }
+    public Board getBoardById(Board board);
 
-  public Set<Board> getAllBoards() {
-    return boardDao.getAllPojos();
-  }
+    public Set<Board> getAllBoards();
+    
+    public User authenticateUser(User user);
+    
+    public void updateUser(User user);
+    
+    public void insertUser(User user);
+    
+    public boolean validRegistration(User user);
+
 }

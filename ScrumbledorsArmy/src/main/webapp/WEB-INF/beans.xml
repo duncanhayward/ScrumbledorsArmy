@@ -1,20 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- configure the spring container -->
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:mvc="http://www.springframework.org/schema/mvc"
-	xmlns:tx="http://www.springframework.org/schema/tx"
 	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:c="http://www.springframework.org/schema/c"
+	xmlns:tx="http://www.springframework.org/schema/tx"
 	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.2.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd
 		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.2.xsd
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.2.xsd">
 
-	<context:component-scan base-package="com.revature"></context:component-scan>
+
+<context:component-scan base-package="com.revature"></context:component-scan>
 
 	<tx:annotation-driven />
+	
+	<!-- Turn MVC @s @Controller, @Requester -->
+<mvc:annotation-driven/>
+
+<!-- Tell Dispacher Servlet the location of our static content -->
+<mvc:resources location="/static/" mapping="/static/**"></mvc:resources>
 
 	<!-- We need to configure Hibernate with Spring: called contextual Sessions -->
 
@@ -39,7 +46,6 @@
 			<props>
 				<prop key="hibernate.dialect">org.hibernate.dialect.Oracle10gDialect</prop>
 				<prop key="hibernate.show_sql">true</prop>
-				<prop key="hibernate.hbm2ddl.auto">none</prop>
 			</props>
 		</property>
 
@@ -52,5 +58,7 @@
 		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
 		<property name="sessionFactory" ref="mySessionFactory"></property>
 	</bean>
+
+
 
 </beans>
