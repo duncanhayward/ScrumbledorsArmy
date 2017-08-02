@@ -19,11 +19,10 @@ public class TaskDaoImpli implements Dao<Task> {
 	private SessionFactory sessionFactory;
 
 	@Override
-	public void insert(Task obj) {
+	public Integer insert(Task obj) {
 		System.out.println("Inserting Task");
 		Session session=sessionFactory.getCurrentSession();
-		session.save(obj);
-		
+		return (Integer) session.save(obj);
 	}
 
 	@Override
