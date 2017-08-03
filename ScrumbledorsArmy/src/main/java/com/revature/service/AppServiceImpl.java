@@ -1,7 +1,11 @@
 package com.revature.service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
+import org.hibernate.criterion.Criterion;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,16 +20,17 @@ public class AppServiceImpl implements AppService{
     
 
       @Autowired
-      private static Dao<User> userDao;
+      private  Dao<User> userDao;
      
       @Autowired
-      private static Dao<Board> boardDao;
+      private  Dao<Board> boardDao;
       
-      @Autowired
-      private static AppService app;
+
+      private  AppService app;
       
       @Override
       public  User getUser(User user) {
+    	  System.out.println("User in IMPL ->"+ user);
         return userDao.getPojoById(user);
     }
     @Override
@@ -38,13 +43,21 @@ public class AppServiceImpl implements AppService{
     }
     @Override
     public User authenticateUser(User user) {
-          app.getUser(user);
+    	System.out.println("auth in IMPL"+ user);
+    	List<Criterion> restrict = new ArrayList<>();
+    	restrict.add(Restrictions.and(Restrictions.ilike("username", user.getUsername()),
+    			Restrictions.ilike("password", user.getPassword())));
+    	
+         ArrayList<User> users= (ArrayList<User>) userDao.getAllPojos(restrict);
+         
 
-          if(user.getUsername() != null && user.getPassword() != null){
+          if(users.get(0)!= null ){
                 System.out.println(user);
                 System.out.println(userDao);
-                return user;    
+                System.out.println("Validation Successfull");
+                return users.get(0);    
             }
+          System.out.println("Failed!!!!!");
         return null;
     }
     

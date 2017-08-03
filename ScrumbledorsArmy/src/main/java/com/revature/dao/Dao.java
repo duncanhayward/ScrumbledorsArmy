@@ -12,6 +12,8 @@ public interface Dao<T> {
 
   // Read
   public T getPojoById(T obj);
+  
+//  public T getPojoByUsername(T obj);
 
   public Set<T> getAllPojos();
 

@@ -31,6 +31,7 @@ public class UserDaoImpl implements Dao<User> {
   @Override
   public User getPojoById(User obj) {
     System.out.println("Getting User");
+//    obj.setId(21);
     Session session = sessionFactory.getCurrentSession();
     return (User) session.get(User.class, obj.getId());
   }
@@ -69,5 +70,12 @@ public class UserDaoImpl implements Dao<User> {
     Session session = sessionFactory.getCurrentSession();
     session.delete(obj);
   }
+
+//@Override
+//public User getPojoByUsername(User obj) {
+//    System.out.println("Getting User");
+//    Session session = sessionFactory.getCurrentSession();
+//    return (User) session.get(User.class, obj.getUsername());
+//}
 
 }
