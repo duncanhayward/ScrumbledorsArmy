@@ -1,13 +1,13 @@
 package com.revature.dao;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Criterion;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
@@ -18,82 +18,81 @@ import com.revature.pojo.Role;
 import com.revature.pojo.User;
 
 @Repository
-@Component
-public class BoardRoleDaoImpl implements BoardRoleDao {
+public class BoardRoleDaoImpl implements Dao<BoardRole> {
 
-  @Autowired
-  private SessionFactory sessionFactory;
+	@Autowired
+	private SessionFactory sessionFactory;
 
-  @Override
-  public void insert(BoardRole obj) {
-    System.out.println("Inserting a Board Role");
-    Session session = sessionFactory.getCurrentSession();
-    session.save(obj);
-  }
+	@Override
+	public Integer insert(BoardRole obj) {
+		Session session = sessionFactory.getCurrentSession();
+		return (Integer) session.save(obj);
+	}
 
-  @Override
-  @Deprecated
-  public BoardRole getPojoById(BoardRole obj) {
-    // TODO Auto-generated method stub
-    return null;
-  }
+	@Override
+	public BoardRole getPojoById(BoardRole obj) {
+		// TODO Auto-generated method stub
+		return (BoardRole) sessionFactory.getCurrentSession().get(BoardRole.class, obj.getBrId());
+	}
 
-  @Override
-  public BoardRole getPojoByUserId(User obj) {
-    System.out.println("Pulling a Board Role by User ID");
-    Session session = sessionFactory.getCurrentSession();
-    return (BoardRole) session.get(BoardRole.class, obj.getId());
-  }
+	@Override
+	public List<BoardRole> getAllPojos() {
+		Session session = sessionFactory.getCurrentSession();
+		Criteria crit = session.createCriteria(BoardRole.class);
+		return (List<BoardRole>) crit.list();
+	}
 
-  @Override
-  public BoardRole getPojoByBoardId(Board obj) {
-    System.out.println("Pulling a Board Role by Board ID");
-    Session session = sessionFactory.getCurrentSession();
-    return (BoardRole) session.get(BoardRole.class, obj.getId());
-  }
+	@Override
+	public List<BoardRole> getAllPojos(List<Criterion> restrictions) {
+		Session session = sessionFactory.getCurrentSession();
+		Criteria crit = session.createCriteria(BoardRole.class);
+		for (Criterion c : restrictions) {
 
-  @Override
-  public BoardRole getPojoByRoleId(Role obj) {
-    System.out.println("Pulling a Board Role by Role ID");
-    Session session = sessionFactory.getCurrentSession();
-    return (BoardRole) session.get(BoardRole.class, obj.getId());
-  }
+			crit.add(c);
 
-  @Override
-  public Set<BoardRole> getAllPojos() {
-    System.out.println("Getting all Board Roles");
-    Session session = sessionFactory.getCurrentSession();
-    Criteria crit = session.createCriteria(BoardRole.class);
-    Set<BoardRole> roles = new TreeSet<BoardRole>(crit.list());
-    return roles;
-  }
+		}
+		return (List<BoardRole>) crit.list();
+	}
 
-  @Override
-  public Set<BoardRole> getAllPojos(List<Criterion> restrictions) {
-    System.out.println("Getting all Board Roles with Criteria");
-    Session session = sessionFactory.getCurrentSession();
-    Criteria crit = session.createCriteria(BoardRole.class);
-    for (Criterion c : restrictions) {
+	@Override
+	public void update(BoardRole obj) {
+		Session session = sessionFactory.getCurrentSession();
+		session.update(obj);
+	}
 
-      crit.add(c);
+	@Override
+	public void delete(BoardRole obj) {
+		Session session = sessionFactory.getCurrentSession();
+		session.delete(obj);
+	}
 
-    }
-    Set<BoardRole> roles = new TreeSet<BoardRole>(crit.list());
-    return roles;
-  }
-
-  @Override
-  public void update(BoardRole obj) {
-    System.out.println("Updating a Board Role");
-    Session session = sessionFactory.getCurrentSession();
-    session.update(obj);
-  }
-
-  @Override
-  public void delete(BoardRole obj) {
-    System.out.println("Deleting a Board Role");
-    Session session = sessionFactory.getCurrentSession();
-    session.delete(obj);
-  }
+//	@Override
+//	public BoardRole getPojoByUserIdAndBoardId(User user, Board board) {
+//		// TODO Auto-generated method stub
+//
+//		Session session = sessionFactory.getCurrentSession();
+//		Criteria crit = session.createCriteria(BoardRole.class);
+//		crit.add(Restrictions.and(Restrictions.ilike("u_id", user.getId()), Restrictions.ilike("b_id", board.getId())));
+//
+//		return null;
+//	}
+//
+//	@Override
+//	public ArrayList<BoardRole> getPojoByUserId(User obj) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//	@Override
+//	public ArrayList<BoardRole> getPojoByBoardId(Board obj) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//	@Override
+//	public ArrayList<BoardRole> getPojoByRoleId(Role obj) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
 
 }

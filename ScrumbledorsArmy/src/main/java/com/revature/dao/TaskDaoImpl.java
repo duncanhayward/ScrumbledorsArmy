@@ -1,8 +1,6 @@
 package com.revature.dao;
 
 import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
@@ -15,39 +13,33 @@ import org.springframework.stereotype.Repository;
 import com.revature.pojo.Task;
 
 @Repository
-@Component
 public class TaskDaoImpl implements Dao<Task> {
 
   @Autowired
   private SessionFactory sessionFactory;
 
   @Override
-  public void insert(Task obj) {
-    System.out.println("Inserting Task");
+  public Integer insert(Task obj) {
     Session session = sessionFactory.getCurrentSession();
-    session.save(obj);
+    return (Integer) session.save(obj);
 
   }
 
   @Override
   public Task getPojoById(Task obj) {
-    System.out.println("Getting Task");
     Session session = sessionFactory.getCurrentSession();
     return (Task) session.get(Task.class, obj.getId());
   }
 
   @Override
-  public Set<Task> getAllPojos() {
-    System.out.println("Getting all tasks");
+  public List<Task> getAllPojos() {
     Session session = sessionFactory.getCurrentSession();
     Criteria crit = session.createCriteria(Task.class);
-    Set<Task> tasks = new TreeSet<Task>(crit.list());
-    return tasks;
+    return (List<Task>) crit.list();
   }
 
   @Override
-  public Set<Task> getAllPojos(List<Criterion> restrictions) {
-    System.out.println("Getting all Tasks with Criteria");
+  public List<Task> getAllPojos(List<Criterion> restrictions) {
     Session session = sessionFactory.getCurrentSession();
     Criteria crit = session.createCriteria(Task.class);
     for (Criterion c : restrictions) {
@@ -55,13 +47,11 @@ public class TaskDaoImpl implements Dao<Task> {
       crit.add(c);
 
     }
-    Set<Task> tasks = new TreeSet<Task>(crit.list());
-    return tasks;
+    return (List<Task>) crit.list();
   }
 
   @Override
   public void update(Task obj) {
-    System.out.println("Updating Task");
     Session session = sessionFactory.getCurrentSession();
     session.update(obj);
 
@@ -69,7 +59,6 @@ public class TaskDaoImpl implements Dao<Task> {
 
   @Override
   public void delete(Task obj) {
-    System.out.println("Deleating Task");
     Session session = sessionFactory.getCurrentSession();
     session.delete(obj);
   }
