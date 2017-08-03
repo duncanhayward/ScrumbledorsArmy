@@ -49,7 +49,7 @@ public class Driver {
 
 		System.out.println(boardRole);
 
-		service.saveBoardRole(boardRole);
+		//service.saveBoardRole(boardRole);
 
 		BoardRole newBoardRole = new BoardRole();
 		newBoardRole.setBrId(new BoardRoleId());
