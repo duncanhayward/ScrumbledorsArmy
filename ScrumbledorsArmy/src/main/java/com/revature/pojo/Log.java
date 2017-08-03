@@ -25,12 +25,16 @@ public class Log implements Serializable {
   @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq")
   @Column(name = "L_ID")
   private int id;
+
   @Column(name = "U_ID")
   private User user;
+
   @Column(name = "L_DESC")
   private String description;
+
   @Column(name = "L_TIMESTAMP")
   private Timestamp timestamp;
+
   @Column(name = "LT_ID")
   private LogType logType;
 

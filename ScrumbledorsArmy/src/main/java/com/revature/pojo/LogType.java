@@ -24,10 +24,12 @@ public class LogType implements Serializable {
   @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq")
   @Column(name = "LT_ID")
   public int id;
+
   @Column(name = "LT_TYPE")
   public String type;
 
-  public LogType() {}
+  public LogType() {
+  }
 
   public LogType(int id, String type) {
     super();

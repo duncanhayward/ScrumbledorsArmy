@@ -3,7 +3,6 @@ package com.revature.pojo;
 import java.io.Serializable;
 
 import javax.persistence.Column;
-import javax.persistence.Embeddable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -25,6 +24,7 @@ public class Role implements Serializable {
   @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq")
   @Column(name = "R_ID")
   private int id;
+
   @Column(name = "R_ROLE")
   private String role;
 

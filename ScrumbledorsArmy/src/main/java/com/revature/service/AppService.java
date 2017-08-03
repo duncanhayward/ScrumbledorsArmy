@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.revature.dao.BoardRoleDao;
 import com.revature.dao.Dao;
 import com.revature.pojo.Board;
 import com.revature.pojo.BoardRole;
@@ -53,6 +52,5 @@ public class AppService {
   public BoardRole getBoardRole(BoardRole br){
 	  return boardRoleDao.getPojoById(br);
   }
-
   
 }

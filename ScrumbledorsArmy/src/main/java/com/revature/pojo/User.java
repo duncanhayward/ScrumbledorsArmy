@@ -3,7 +3,6 @@ package com.revature.pojo;
 import java.io.Serializable;
 
 import javax.persistence.Column;
-import javax.persistence.Embeddable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -25,10 +24,13 @@ public class User implements Serializable {
   @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq")
   @Column(name = "U_ID")
   private int id;
+
   @Column(name = "U_USERNAME")
   private String username;
+
   @Column(name = "U_PASSWORD")
   private String password;
+
   @Column(name = "U_EMAIL")
   private String email;
 

@@ -30,13 +30,6 @@ public class Driver {
 
 		System.out.println(board);
 
-		/*
-		 * Role role = new Role(); role.setRole("Admin"); int id =
-		 * service.saveRole(role);
-		 * 
-		 * System.out.println(id);
-		 */
-
 		Role newRole = new Role();
 		newRole.setId(1);
 		newRole = service.getRoleById(newRole);
@@ -48,8 +41,6 @@ public class Driver {
 		boardRole.setR_id(newRole);
 
 		System.out.println(boardRole);
-
-		//service.saveBoardRole(boardRole);
 
 		BoardRole newBoardRole = new BoardRole();
 		newBoardRole.setBrId(new BoardRoleId());

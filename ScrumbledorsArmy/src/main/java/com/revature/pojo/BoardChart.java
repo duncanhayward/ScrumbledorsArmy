@@ -27,17 +27,17 @@ public class BoardChart implements Serializable {
   @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq")
   @Column(name = "BD_ID")
   private int id;
-  
+
   @ManyToOne
   @JoinColumn(name = "B_ID")
   private Board board;
-  
+
   @Column(name = "BD_START")
   private Timestamp start;
-  
+
   @Column(name = "BD_END")
   private Timestamp end;
-  
+
   @Column(name = "BD_NAME")
   private String name;
 

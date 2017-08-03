@@ -2,56 +2,55 @@ package com.revature.pojo;
 
 import java.io.Serializable;
 
-import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @Embeddable
-public class BoardRoleId implements Serializable{
-	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 2251900798381911473L;
+public class BoardRoleId implements Serializable {
 
-	@ManyToOne
-	@JoinColumn(name="U_ID")
-	private User user;
+  /**
+   * 
+   */
+  private static final long serialVersionUID = 2251900798381911473L;
 
-	@ManyToOne
-	@JoinColumn(name="B_ID")
-	private Board board;
+  @ManyToOne
+  @JoinColumn(name = "U_ID")
+  private User user;
 
-	public BoardRoleId() {
-		super();
-	}
+  @ManyToOne
+  @JoinColumn(name = "B_ID")
+  private Board board;
 
-	public BoardRoleId(User user, Board board) {
-		super();
-		this.user = user;
-		this.board = board;
-	}
+  public BoardRoleId() {
+    super();
+  }
 
-	public User getUser() {
-		return user;
-	}
+  public BoardRoleId(User user, Board board) {
+    super();
+    this.user = user;
+    this.board = board;
+  }
 
-	public void setUser(User user) {
-		this.user = user;
-	}
+  @Override
+  public String toString() {
+    return "BoardRoleId [user=" + user + ", board=" + board + "]";
+  }
 
-	public Board getBoard() {
-		return board;
-	}
+  public User getUser() {
+    return user;
+  }
 
-	public void setBoard(Board board) {
-		this.board = board;
-	}
+  public void setUser(User user) {
+    this.user = user;
+  }
 
-	@Override
-	public String toString() {
-		return "BoardRoleId [user=" + user + ", board=" + board + "]";
-	}
+  public Board getBoard() {
+    return board;
+  }
+
+  public void setBoard(Board board) {
+    this.board = board;
+  }
 
 }
