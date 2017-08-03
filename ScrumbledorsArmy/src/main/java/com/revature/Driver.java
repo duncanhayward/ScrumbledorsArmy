@@ -19,13 +19,13 @@ public class Driver {
 		AppService service = (AppService) ac.getBean("AppService");
 
 		User user = new User();
-		user.setId(1);
+		user.setId(21);
 		user = service.getUserById(user);
 
 		System.out.println(user);
 
 		Board board = new Board();
-		board.setId(2);
+		board.setId(22);
 		board = service.getBoardById(board);
 
 		System.out.println(board);
@@ -49,7 +49,7 @@ public class Driver {
 
 		System.out.println(boardRole);
 
-		//service.saveBoardRole(boardRole);
+		service.saveBoardRole(boardRole);
 
 		BoardRole newBoardRole = new BoardRole();
 		newBoardRole.setBrId(new BoardRoleId());
