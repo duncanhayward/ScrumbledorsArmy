@@ -78,8 +78,8 @@ var app = angular.module("routePage", ["ngRoute"])
         		
         		$scope.response= JSON.stringify(response.data.username);
         		console.log('response.data->'+$scope.response);
-            	console.log(response);
-            	if($scope.response=='null'){
+            	console.log(response.status);
+            	if(response.status!=200){
             		console.log('Login Failed!!')
             	}
             	else {
