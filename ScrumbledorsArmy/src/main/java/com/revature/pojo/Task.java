@@ -30,7 +30,7 @@ public class Task implements Serializable {
   @Column(name = "T_ID")
   private int id;
   
-  @ManyToOne(fetch=FetchType.LAZY)
+  @ManyToOne(fetch=FetchType.EAGER)
   @JoinColumn(name = "S_ID")
   private Story story;
   
@@ -52,9 +52,9 @@ public class Task implements Serializable {
   }
 
   @Override
-  public String toString() {
-    return "Task [id=" + id + ", story=" + story + ", description=" + description + ", done=" + done + "]";
-  }
+public String toString() {
+	return "Task [id=" + id + ", story=" + story + ", description=" + description + ", done=" + done + "]";
+}
 
   public int getId() {
     return id;

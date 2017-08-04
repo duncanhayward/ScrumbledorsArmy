@@ -64,56 +64,5 @@ public class BoardRole implements Serializable {
 	public String toString() {
 		return "BoardRole [brId=" + brId + ", r_id=" + r_id + "]";
 	}
-	
-//	@ManyToOne
-//	@JoinColumn(name="U_ID")
-//	private User user;
-//
-//	@ManyToOne
-//	@JoinColumn(name="B_ID")
-//	private Board board;
-//
-//	@ManyToOne
-//	@JoinColumn(name="R_ID")
-//	private Role role;
-//
-//	public BoardRole() {
-//	}
-//
-//	public BoardRole(User user, Board board, Role role) {
-//		super();
-//		this.user = user;
-//		this.board = board;
-//		this.role = role;
-//	}
-//
-//	@Override
-//	public String toString() {
-//		return "BoardRole [user=" + user + ", board=" + board + ", role=" + role + "]";
-//	}
-//
-//	public User getUser() {
-//		return user;
-//	}
-//
-//	public void setUser(User user) {
-//		this.user = user;
-//	}
-//
-//	public Board getBoard() {
-//		return board;
-//	}
-//
-//	public void setBoard(Board board) {
-//		this.board = board;
-//	}
-//
-//	public Role getRole() {
-//		return role;
-//	}
-//
-//	public void setRole(Role role) {
-//		this.role = role;
-//	}
 
 }

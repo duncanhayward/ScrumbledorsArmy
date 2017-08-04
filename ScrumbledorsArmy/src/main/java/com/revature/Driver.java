@@ -1,5 +1,7 @@
 package com.revature;
 
+import java.sql.Timestamp;
+
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -7,8 +9,10 @@ import com.revature.pojo.Board;
 import com.revature.pojo.BoardRole;
 import com.revature.pojo.BoardRoleId;
 import com.revature.pojo.Role;
+import com.revature.pojo.Story;
+import com.revature.pojo.SwimLane;
 import com.revature.pojo.User;
-import com.revature.service.AppService;
+import com.revature.service.DriverTestService;
 
 public class Driver {
 
@@ -16,16 +20,16 @@ public class Driver {
 		System.out.println("Test");
 
 		ApplicationContext ac = new ClassPathXmlApplicationContext("beans.xml");
-		AppService service = (AppService) ac.getBean("AppService");
+		DriverTestService service = (DriverTestService) ac.getBean("AppService");
 
 		User user = new User();
-		user.setId(1);
+		user.setId(21);
 		user = service.getUserById(user);
 
 		System.out.println(user);
 
 		Board board = new Board();
-		board.setId(2);
+		board.setId(22);
 		board = service.getBoardById(board);
 
 		System.out.println(board);
@@ -61,6 +65,34 @@ public class Driver {
 		newBoardRole = service.getBoardRole(newBoardRole);
 
 		System.out.println(newBoardRole);
+		
+		SwimLane sw = new SwimLane();
+		sw.setBoard(board);
+		sw.setName("To Do");
+		sw.setOrder(0);
+		
+		//service.insertSwimLane(sw);
+		
+		sw.setId(2050);
+		
+		sw=service.getSwimLane(sw);
+		
+		board = service.getBoardById(board);
+		
+		System.out.println("SwimLanes: " +board.getSwimLanes());
+		
+		Story story = new Story();
+		story.setDescription("Test the Story Dao");
+		story.setStart(new Timestamp(System.currentTimeMillis()));
+		story.setEndExpected(new Timestamp(story.getStart().getTime() + (14 * 24 * 60 * 60 * 1000)));
+		story.setSwimLane(sw);
+		story.setPoints(1000000);
+		
+		//service.insertStory(story);
+		
+		//finish testing
+		
+		
 	}
 
 }

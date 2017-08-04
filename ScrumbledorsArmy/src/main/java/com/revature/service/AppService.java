@@ -13,33 +13,30 @@ import com.revature.pojo.BoardRole;
 import com.revature.pojo.Role;
 import com.revature.pojo.User;
 
-
 public interface AppService {
 
-  public User getUserById(User user);
+	public User getUserById(User user);
 
-  public Board getBoardById(Board board);
+	public Board getBoardById(Board board);
 
-  public List<Board> getAllBoards() ;
+	public List<Board> getAllBoards();
 
-  public Integer saveRole(Role role);
-  
-  public Role getRoleById(Role role);
+	public Integer saveRole(Role role);
 
-  public void saveBoardRole(BoardRole boardRole);
-  
-  public BoardRole getBoardRole(BoardRole br);
+	public Role getRoleById(Role role);
 
-User getUser(User user);
+	public void saveBoardRole(BoardRole boardRole);
 
-User authenticateUser(User user);
+	public BoardRole getBoardRole(BoardRole br);
 
-void updateUser(User user);
+	User getUser(User user);
 
-void insertUser(User user);
+	User authenticateUser(User user);
 
-boolean validRegistration(User user);
+	void updateUser(User user);
 
-  
+	void insertUser(User user);
+
+	boolean validRegistration(User user);
+
 }
-
