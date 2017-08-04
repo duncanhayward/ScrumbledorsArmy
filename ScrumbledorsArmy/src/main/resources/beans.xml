@@ -46,7 +46,7 @@
 		</property>
 
 		<!-- scans for JPA java persistence API -->
-		<property name="packagesToScan" value="com.revature"></property>
+		<property name="packagesToScan" value="com.revature.pojo"></property>
 	</bean>
 
 	<!-- create a transaction manager and give the sessionfactory -->

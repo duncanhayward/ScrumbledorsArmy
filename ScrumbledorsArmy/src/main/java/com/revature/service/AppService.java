@@ -29,6 +29,10 @@ public class AppService {
     return userDao.getPojoById(user);
   }
 
+  public List<User> getAllUsers() {
+    return userDao.getAllPojos();
+  }
+
   public Board getBoardById(Board board) {
     return boardDao.getPojoById(board);
   }
