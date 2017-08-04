@@ -38,12 +38,12 @@ public class Task implements Serializable {
   private String description;
   
   @Column(name = "T_DONE")
-  private String done; // actual type is constrained char treated as boolean
+  private char done; // actual type is constrained char treated as boolean
 
   public Task() {
   }
 
-  public Task(int id, Story story, String description, String done) {
+  public Task(int id, Story story, String description, char done) {
     super();
     this.id = id;
     this.story = story;
@@ -80,11 +80,11 @@ public String toString() {
     this.description = description;
   }
 
-  public String getDone() {
+  public char getDone() {
     return done;
   }
 
-  public void setDone(String done) {
+  public void setDone(char done) {
     this.done = done;
   }
 

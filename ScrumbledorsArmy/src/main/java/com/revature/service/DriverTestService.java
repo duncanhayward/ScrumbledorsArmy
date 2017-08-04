@@ -9,10 +9,12 @@ import org.springframework.transaction.annotation.Transactional;
 import com.revature.dao.BoardRoleDao;
 import com.revature.dao.Dao;
 import com.revature.pojo.Board;
+import com.revature.pojo.BoardChart;
 import com.revature.pojo.BoardRole;
 import com.revature.pojo.Role;
 import com.revature.pojo.Story;
 import com.revature.pojo.SwimLane;
+import com.revature.pojo.Task;
 import com.revature.pojo.User;
 
 @Service(value = "AppService")
@@ -31,6 +33,10 @@ public class DriverTestService {
 	private Dao<SwimLane> swimLaneDao;
 	@Autowired
 	private Dao<Story> storyDao;
+	@Autowired
+	private Dao<Task> taskDao;
+	@Autowired
+	private Dao<BoardChart> bdChartDao;
 
 	public User getUserById(User user) {
 		return userDao.getPojoById(user);
@@ -72,6 +78,30 @@ public class DriverTestService {
 	public void insertStory(Story story) {
 		// TODO Auto-generated method stub
 		storyDao.insert(story);
+	}
+
+	public Story getStory(Story story) {
+		// TODO Auto-generated method stub
+		return storyDao.getPojoById(story);
+	}
+
+	public void insertTask(Task task) {
+		// TODO Auto-generated method stub
+		taskDao.insert(task);
+	}
+	
+	public Task getTask(Task task){
+		return taskDao.getPojoById(task);
+	}
+
+	public void insertBDChart(BoardChart bdChart) {
+		// TODO Auto-generated method stub
+		bdChartDao.insert(bdChart);
+	}
+
+	public BoardChart getBDChart(BoardChart bdChart) {
+		// TODO Auto-generated method stub
+		return bdChartDao.getPojoById(bdChart);
 	}
 
 }
