@@ -25,7 +25,12 @@ var app = angular.module("routePage", ["ngRoute"])
       .when("/scrumboard", {
         templateUrl : "dragDropEx.html",
         controller: 'scrumCtrl'	
-    });
+    })
+    .when("/burndown",{
+    	templateUrl:"Test.html",
+    	controller:"ChartCtrl"
+    })
+    ;
 })
 
 .config(['$locationProvider', function($locationProvider) {
@@ -41,6 +46,7 @@ var app = angular.module("routePage", ["ngRoute"])
 	
 })
 
+
 .controller("scrumPageCtrl", function($scope, $http, $location) {
 	 console.log('scrumCtrl callled');
 	 $scope.changeToScrum= function(){
@@ -50,6 +56,7 @@ var app = angular.module("routePage", ["ngRoute"])
 	
 	
 })
+
 
 .controller("loginCtrl", function($scope, $http, $location) {
   var username = "jay";
@@ -112,6 +119,7 @@ var app = angular.module("routePage", ["ngRoute"])
     }
 })
 
+
 .controller('scrumCtrl', function($scope){
 
 	$scope.message="HELLO";
@@ -145,7 +153,10 @@ var app = angular.module("routePage", ["ngRoute"])
 		
 		//with each swim lane added, update width of page to house all lanes without vertical scroll
 //		updateWidth();
+	
+		
 	}
+	
 	
 })
 

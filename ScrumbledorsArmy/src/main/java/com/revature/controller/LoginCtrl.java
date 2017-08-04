@@ -19,7 +19,7 @@ public class LoginCtrl {
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public ResponseEntity<User> loginUser(@RequestBody User user) {
-		System.out.println("updating exsisting user");
+		System.out.println("validating and loggin in as user");
 		User userReturned = app.authenticateUser(user);
 		if (userReturned != null) {
 			return new ResponseEntity<User>(userReturned, HttpStatus.OK);
