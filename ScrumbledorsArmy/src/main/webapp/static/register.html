@@ -1,30 +1,43 @@
-  <div class="form-group">
+   <div class="container">
+  <h1>Register Page</h1><br>
+  <div class="form-group row">
     <label for="username" class="col-sm-2 control-label">Username:</label>
     <div class="col-sm-2">
-      <input type="text" class="form-control" id="username" name="username" placeholder="Username">
+      <input type="text" class="form-control" id="username" name="username" placeholder="Username" ng-model="rusername" required>
     </div>
   </div>
-  <div class="form-group">
+  <div class="form-group row">
     <label for="email" class="col-sm-2 control-label">Email:</label>
     <div class="col-sm-2">
-      <input type="email" class="form-control" id="email" name="email" placeholder="Email">
+      <input type="email" class="form-control" id="email" name="email" placeholder="Email"  ng-model="remail" required>
     </div>
   </div>
-  <div class="form-group">
-    <label for="password" class="col-sm-2 control-label">Password:</label>
+  <div class="form-group row">
+    <label for="password" class="col-sm-2 control-label"  >Password:</label>
     <div class="col-sm-2">
-      <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+      <input type="password" class="form-control" id="rpassword" name="password" placeholder="Password" ng-model="rpassword" required>
  
    </div>
     </div>
-  <div class="form-group">
-    <div class="col-sm-offset-2 col-sm-2">
-      <button id= "submit" class="btn btn-primary">Register</button>  
-         <button id= "submit" class="btn btn-primary"  ng-click="changePageToLogin()">Login</button>  
-    </div>
+     <div class="form-group row">
+    <label for="password" class="col-sm-2 control-label"  >Re-Enter Password:</label>
+    <div class="col-sm-2">
+      <input type="password" class="form-control" id="rcpassword" name="password" placeholder="Password" ng-model="rcpassword" required>
+ 
    </div>
+    </div>
+  <div class="form-group row">
+ 
+      <button  class="btn btn-primary" ng-click="ValidateRegister()">Register</button>  
+         <button  class="btn btn-primary"  ng-click="changePageToLogin()">Login</button>  
+    
+   </div>
+   
+   <div id = "rmessage" class="alert alert-danger rmessage" ng-model="rmessage">{{rmessage}}</div>
+   
     <div class="form-group">
     <div class="col-sm-offset-2 col-sm-2">
     
     </div>
+   </div>
    </div>
