@@ -11,8 +11,8 @@ var app = angular.module("routePage", ["ngRoute"])
        
     })
     .when("/home", {
-        templateUrl : "static/home.html"
-//        controller : "londonCtrl"
+        templateUrl : "home.html",
+        controller : "scrumPageCtrl"
     })
     .when("/login", {
         templateUrl : "login.html",
@@ -36,6 +36,16 @@ var app = angular.module("routePage", ["ngRoute"])
 	
 	 $scope.changePageToLogin= function(){
 			$location.path('/login');
+		  }
+	
+	
+})
+
+.controller("scrumPageCtrl", function($scope, $http, $location) {
+	 console.log('scrumCtrl callled');
+	 $scope.changeToScrum= function(){
+		
+			$location.path('/scrumboard');
 		  }
 	
 	
@@ -78,13 +88,15 @@ var app = angular.module("routePage", ["ngRoute"])
         		
         		$scope.response= JSON.stringify(response.data.username);
         		console.log('response.data->'+$scope.response);
-            	console.log(response);
-            	if($scope.response=='null'){
+            	console.log(response.status);
+            	if(response.status!=200){
             		console.log('Login Failed!!')
+            		
             	}
             	else {
             		console.log('Login Successfull');
-            		 $('.login').css('display', 'none');
+            		$location.path('/home');
+//            		 $('.login').css('display', 'none');
             	}
  
             }, function errorCallback(response) {

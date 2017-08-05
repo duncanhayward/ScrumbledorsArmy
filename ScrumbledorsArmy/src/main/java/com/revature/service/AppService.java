@@ -14,46 +14,31 @@ import com.revature.pojo.Role;
 import com.revature.pojo.User;
 
 
-@Service(value = "AppService")
-@Transactional
-public class AppService {
+public interface AppService {
 
-  @Autowired
-  private Dao<User> userDao;
-  @Autowired
-  private Dao<Board> boardDao;
-  @Autowired
-  private Dao<Role> roleDao;
-  @Autowired
-  private Dao<BoardRole> boardRoleDao;
+  public User getUserById(User user);
 
-  public User getUserById(User user) {
-    return userDao.getPojoById(user);
-  }
+  public Board getBoardById(Board board);
 
-  public Board getBoardById(Board board) {
-    return boardDao.getPojoById(board);
-  }
+  public List<Board> getAllBoards() ;
 
-  public List<Board> getAllBoards() {
-    return boardDao.getAllPojos();
-  }
-
-  public Integer saveRole(Role role) {
-    return roleDao.insert(role);
-  }
-
-  public Role getRoleById(Role role) {
-    return roleDao.getPojoById(role);
-  }
-
-  public void saveBoardRole(BoardRole boardRole) {
-    boardRoleDao.insert(boardRole);
-  }
+  public Integer saveRole(Role role);
   
-  public BoardRole getBoardRole(BoardRole br){
-	  return boardRoleDao.getPojoById(br);
-  }
+  public Role getRoleById(Role role);
+
+  public void saveBoardRole(BoardRole boardRole);
+  
+  public BoardRole getBoardRole(BoardRole br);
+
+User getUser(User user);
+
+User authenticateUser(User user);
+
+void updateUser(User user);
+
+void insertUser(User user);
+
+boolean validRegistration(User user);
 
   
 }
