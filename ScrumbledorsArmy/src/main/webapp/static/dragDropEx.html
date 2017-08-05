@@ -65,13 +65,15 @@
 	</div>
 <!-- </div> -->
 <br>
-
 <div class="container-fluid" >
 	<button id="addLane" class="btn btn-info" ng-click="addElement()">Add Lane</button>
-message->	{{message}}
-<a href="Test.html">Burndown</a>
 </div>
-<div id ="target"></div>
+<div id ="target"></div><br>
+Show Chart:<input type="checkbox" ng-model="myvar">
+<br><div style="width: 500px;" ng-show="myvar" ng-controller="ChartController">
+      <div style="width: 500px;" id="chartContainer"></div>
+      
+    </div>
 
 
 
