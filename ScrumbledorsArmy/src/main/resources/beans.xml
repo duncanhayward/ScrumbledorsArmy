@@ -26,9 +26,9 @@
 		<!-- Setter DI of Username, pw, URL, Driver -->
 		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"></property>
 		<!-- change this information to reflect the RDS -->
-		<property name="username" value="aws_bank_db"></property>
-		<property name="password" value="321June}"></property>
-		<property name="url" value="jdbc:oracle:thin:@octocat.cjx2iyo8y1oj.us-east-2.rds.amazonaws.com:1521:ORCL"></property>
+		<property name="username" value="aws_scrum_local"></property>
+		<property name="password" value="P4SSW0RD"></property>
+		<property name="url" value="jdbc:oracle:thin:@localhost:1521:xe"></property>
 	</bean>
 
 	<!-- Now give that DataSource object to the SessionFactory -->

@@ -22,7 +22,13 @@ public class UserDaoImpl implements Dao<User> {
   @Override
   public Integer insert(User obj) {
     Session session = sessionFactory.getCurrentSession();
-    return (Integer) session.save(obj);
+    try {
+      return (Integer) session.save(obj);
+    } catch (Exception e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    }
+    return -1;
   }
 
   @Override

@@ -20,33 +20,21 @@ public class Driver {
 		AppService service = (AppService) ac.getBean("AppService");
 
 		User user = new User();
-		user.setId(21);
+		user.setId(1);
 		user = service.getUserById(user);
 
 		Board board = new Board();
-		board.setId(22);
+		board.setId(1);
 		board = service.getBoardById(board);
 
 		Role newRole = new Role();
-		newRole.setId(1);
+		newRole.setId(50);
 		newRole = service.getRoleById(newRole);
-
-		BoardRole boardRole = new BoardRole();
-		boardRole.setBrId(new BoardRoleId(user, board));
-		boardRole.setR_id(newRole);
-
-		BoardRole newBoardRole = new BoardRole();
-		newBoardRole.setBrId(new BoardRoleId());
-		newBoardRole.getBrId().setUser(user);
-		newBoardRole.getBrId().setBoard(board);
-
-		newBoardRole = service.getBoardRole(newBoardRole);
-
-		System.out.println(newBoardRole);
 
 		List<User> users;
 		users = service.getAllUsers();
 		System.out.println(users);
+
 	}
 
 }

@@ -25,6 +25,10 @@ public class AppService {
   @Autowired
   private Dao<BoardRole> boardRoleDao;
 
+  public Integer saveUser(User user) {
+    return userDao.insert(user);
+  }
+
   public User getUserById(User user) {
     return userDao.getPojoById(user);
   }
