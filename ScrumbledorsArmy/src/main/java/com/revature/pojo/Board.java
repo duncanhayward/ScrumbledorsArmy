@@ -3,7 +3,9 @@ package com.revature.pojo;
 import java.io.Serializable;
 
 import java.util.ArrayList;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
@@ -23,8 +25,6 @@ import org.hibernate.annotations.FetchMode;
 @Entity
 @Table(name = "BOARD")
 public class Board implements Serializable {
-
-
 	/**
 	 * 
 	 */
@@ -42,10 +42,20 @@ public class Board implements Serializable {
 
 	@Column(name = "B_DESCRIPTION")
 	private String description;
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "board", orphanRemoval = true)
+	private List<SwimLane> swimLanes = new ArrayList<>();
 	
-//	@OneToMany(mappedBy="B_ID", fetch = FetchType.EAGER)
-//	@Fetch(value=FetchMode.SELECT)
-//	private ArrayList<SwimLane> swimLanes;
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "board", orphanRemoval = true)
+	private List<BoardChart> bdCharts = new ArrayList<>();
+
+	// @OneToMany(cascade = CascadeType.ALL, fetch=FetchType.EAGER,
+	// mappedBy = "board", orphanRemoval = true)
+	// private List<BoardRole> boardRoles = new ArrayList<>();
+
+	// @OneToMany(mappedBy="B_ID", fetch = FetchType.EAGER)
+	// @Fetch(value=FetchMode.SELECT)
+	// private ArrayList<SwimLane> swimLanes;
 
 	public Board() {
 	}
@@ -85,6 +95,21 @@ public class Board implements Serializable {
 	public void setDescription(String description) {
 		this.description = description;
 	}
+	
+	public List<SwimLane> getSwimLanes() {
+		return swimLanes;
+	}
 
+	public void setSwimLanes(List<SwimLane> swimLanes) {
+		this.swimLanes = swimLanes;
+	}
+
+	public List<BoardChart> getBdCharts() {
+		return bdCharts;
+	}
+
+	public void setBdCharts(List<BoardChart> bdCharts) {
+		this.bdCharts = bdCharts;
+	}
 
 }
