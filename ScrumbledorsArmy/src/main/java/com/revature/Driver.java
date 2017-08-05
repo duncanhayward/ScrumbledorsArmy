@@ -22,7 +22,7 @@ public class Driver {
 		System.out.println("Test");
 
 		ApplicationContext ac = new ClassPathXmlApplicationContext("beans.xml");
-		DriverTestService service = (DriverTestService) ac.getBean("AppService");
+		DriverTestService service = (DriverTestService) ac.getBean("DriverAppService");
 
 		User user = new User();
 		user.setId(21); // hard coded

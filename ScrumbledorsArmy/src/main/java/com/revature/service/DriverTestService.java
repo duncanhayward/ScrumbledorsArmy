@@ -17,7 +17,7 @@ import com.revature.pojo.SwimLane;
 import com.revature.pojo.Task;
 import com.revature.pojo.User;
 
-@Service(value = "AppService")
+@Service(value = "DriverAppService")
 @Transactional
 public class DriverTestService {
 
