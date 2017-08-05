@@ -113,24 +113,31 @@ public class ServiceTest {
 		System.out.println(bdChart);
 		service.deleteBdChart(bdChart);
 		
-//		BoardRole boardRole = new BoardRole();
-//		BoardRoleId boardRoleId = new BoardRoleId();
-//		boardRoleId.setBoard(board);
-//		boardRoleId.setUser(user);
-//		boardRole.setR_id(role);
-//		boardRole.setBrId(boardRoleId);
-//		System.out.println(boardRole);
-//		service.insertBoardRole(boardRole);
-//		boardRole=service.getBoardRole(boardRole);
-//		role.setId(1);
-//		boardRole.setR_id(role);
-//		service.updateBoardRole(boardRole);
-//		System.out.println(boardRole);
-//		service.deleteBoardRole(boardRole);
+		BoardRole boardRole = new BoardRole();
+		BoardRoleId boardRoleId = new BoardRoleId();
+		boardRoleId.setBoard(board);
+		boardRoleId.setUser(user);
+		boardRole.setR_id(role);
+		boardRole.setBrId(boardRoleId);
+		System.out.println(boardRole);
+		service.insertBoardRole(boardRole);
+		boardRole=service.getBoardRole(boardRole);
+		
+		//get admin role
+		Role adminRole = new Role();
+		adminRole.setId(1);
+		adminRole = service.getRole(adminRole);
+		
+		boardRole.setR_id(adminRole);
+		service.updateBoardRole(boardRole);
+		System.out.println(boardRole);
+		service.deleteBoardRole(boardRole);
 		service.deleteUser(user);
 		service.deleteStory(story);
 		service.deleteSwimLane(lane);
 		service.deleteBoard(board);
 		service.deleteRole(role);
+		
+		System.out.println("Service Test Finished");
 	}
 }
