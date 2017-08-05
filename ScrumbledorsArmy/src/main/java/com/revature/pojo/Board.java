@@ -45,6 +45,9 @@ public class Board implements Serializable {
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "board", orphanRemoval = true)
 	private List<SwimLane> swimLanes = new ArrayList<>();
+	
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "board", orphanRemoval = true)
+	private List<BoardChart> bdCharts = new ArrayList<>();
 
 	// @OneToMany(cascade = CascadeType.ALL, fetch=FetchType.EAGER,
 	// mappedBy = "board", orphanRemoval = true)
@@ -101,6 +104,12 @@ public class Board implements Serializable {
 		this.swimLanes = swimLanes;
 	}
 
-	
+	public List<BoardChart> getBdCharts() {
+		return bdCharts;
+	}
+
+	public void setBdCharts(List<BoardChart> bdCharts) {
+		this.bdCharts = bdCharts;
+	}
 
 }

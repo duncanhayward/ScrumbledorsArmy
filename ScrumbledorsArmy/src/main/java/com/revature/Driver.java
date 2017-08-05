@@ -29,12 +29,14 @@ public class Driver {
 		user = service.getUserById(user);
 
 		System.out.println(user);
+		System.out.println(user.getBoardRoles());
 
 		Board board = new Board();
 		board.setId(22); // hard coded
 		board = service.getBoardById(board);
 
 		System.out.println(board);
+		System.out.println(board.getBdCharts());
 
 		/*
 		 * Role role = new Role(); role.setRole("Admin"); int id =
@@ -103,6 +105,7 @@ public class Driver {
 		task.setDescription("testing tasks");
 
 		// service.insertTask(task);
+		task.setId(150);
 		task = service.getTask(task);
 		System.out.println(task);
 
