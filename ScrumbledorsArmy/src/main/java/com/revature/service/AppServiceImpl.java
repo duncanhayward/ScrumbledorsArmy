@@ -49,6 +49,7 @@ public class AppServiceImpl implements AppService {
 
 	@Override
 	public Board getBoardById(Board board) {
+	  System.out.println("Board in IMPL ->" + board);
 		return boardDao.getPojoById(board);
 	}
 
@@ -224,6 +225,7 @@ public class AppServiceImpl implements AppService {
 
 	@Override
 	public Role getRole(Role role) {
+	  System.out.println("Role in IMPL ->" + role);
 		return roleDao.getPojoById(role);
 	}
 
@@ -234,6 +236,7 @@ public class AppServiceImpl implements AppService {
 
 	@Override
 	public BoardRole getBoardRole(BoardRole bdRole) {
+	  System.out.println("BoardRole in IMPL ->" + bdRole);
 		return boardRoleDao.getPojoById(bdRole);
 	}
 

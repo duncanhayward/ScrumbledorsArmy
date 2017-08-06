@@ -41,7 +41,8 @@ public class ShareCtrl {
     shareRole.setId(obj.getRoleId());
     shareRole = app.getRole(shareRole);
 
-    BoardRole compareBoardRole = new BoardRole(new BoardRoleId(adminUser, sharedBoard));
+    BoardRoleId compareId = new BoardRoleId(adminUser, sharedBoard);
+    BoardRole compareBoardRole = new BoardRole(compareId);
     compareBoardRole = app.getBoardRole(compareBoardRole);
 
     if (compareBoardRole.getR_id().getRole().equals("Admin")) {
