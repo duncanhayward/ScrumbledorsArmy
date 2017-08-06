@@ -6,4 +6,3 @@ INDEX VERSION 1.3+C:\Users\noney_000\my_git_repos\ScrumbledorsArmy\.metadata\.pl
 923932560.index
 1255663193.index
 3086113467.index
-1255663193.index

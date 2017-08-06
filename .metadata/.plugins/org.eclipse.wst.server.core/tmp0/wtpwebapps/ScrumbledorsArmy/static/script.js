@@ -82,12 +82,102 @@ var app = angular.module("routePage", ["ngRoute", "ngDragDrop", "ui.bootstrap"])
 
 .controller("registerCtrl", function($scope, $http, $location) {
 	
-	 $scope.changePageToLogin= function(){
-			$location.path('/login');
-		  }
-	
-	
+	 $('.rmessage').css('display', 'none');
+     var check = 0;
+     var filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+
+     console.log('Register Ctrl Called');
+     $scope.ValidateRegister = function() {
+         $scope.rmessage = '';
+         $('.rmessage').css('display', 'none');
+
+         console.log('ValidateRegister() callled');
+
+         if ($scope.rpassword == "" || $scope.rcpassword == ""
+                 || $scope.rusername == ""
+                 || $scope.remail == "") {
+             $scope.rmessage += 'Fields Left Empty! \n';
+             check = 1;
+         }
+
+         if ($scope.rpassword != $scope.rcpassword) {
+             $scope.rmessage += 'Passwords Do Not Match! \n';
+             check = 1;
+         }
+
+         if (!filter.test($scope.remail)) {
+             $scope.rmessage += 'Email is Invalid! \n'
+             check = 1;
+         }
+
+         if (check == 1) {
+             $('.rmessage').css('display', 'block');
+             console.log('Validations failed');
+             check = 0;
+
+         } else {
+
+             console.log('Validations passed');
+             $scope.registerUser();
+         }
+
+ 
+     }
+     $scope.changePageToLogin = function() {
+         $location.path('/login');
+     }
+     
+     $scope.registerUser = function() {
+         
+
+         var ruser = {
+             email      :$scope.remail ,
+             username : $scope.rusername,
+             password : $scope.rpassword
+         };
+
+         console.log('User->' + ruser.username);
+         console.log('id->' + ruser.email);
+         console.log('password->' + ruser.password);
+
+         $http({
+             method : 'POST',
+             url : 'http://localhost:8085/ScrumbledorsArmy/register',
+             headers : {
+                 'Content-Type' : 'application/json',
+                 'Accept' : 'application/json'
+             },
+             // data: user//user
+             data : ruser
+         }).then(function successCallback(response) {
+
+             $scope.response = JSON.stringify(response.data.username);
+             console.log('response.data->' + $scope.response);
+             console.log(response.status);
+             if (response.status != 200) {
+                 console.log('Register Failed!!');
+
+             } else {
+                 console.log('Register Successfull');
+                 $location.path('/login');
+                 // $('.login').css('display', 'none');
+             }
+
+         }, function errorCallback(response) {
+             // called asynchronously if an error occurs
+             // or server returns response with an error status.
+             console.log('Not found');
+             // console.log(response);
+         });
+
+         console.log('User->' + ruser.username);
+         
+         }
+     
 })
+	
+	
+//})
 
 .controller("scrumPageCtrl", function($scope, $http, $location) {
 	 console.log('scrumCtrl callled');
@@ -95,6 +185,10 @@ var app = angular.module("routePage", ["ngRoute", "ngDragDrop", "ui.bootstrap"])
 		
 			$location.path('/scrumboard');
 		  }
+	 
+	 $scope.logout = function(){
+         $location.path('/login');
+     }
 	
 	
 })
@@ -160,7 +254,7 @@ var app = angular.module("routePage", ["ngRoute", "ngDragDrop", "ui.bootstrap"])
     }
 })
 
-.controller('scrumCtrl', function($scope, $compile){
+.controller('scrumCtrl', function($scope, $compile, $location){
 	
 	var colId = 1;
 	var cardId = 0;
@@ -348,5 +442,9 @@ var app = angular.module("routePage", ["ngRoute", "ngDragDrop", "ui.bootstrap"])
 	$scope.close=function(){
 		document.getElementById("viewTaskModal").remove();
 	}
+	
+	 $scope.logout = function(){
+         $location.path('/login');
+     }
 	
 })

@@ -146,7 +146,6 @@ public class ServiceTest {
 		Role adminRole = new Role();
 		adminRole.setId(1);
 		adminRole = service.getRole(adminRole);
-		
 		boardRole.setR_id(adminRole);
 		service.updateBoardRole(boardRole);
 		System.out.println(boardRole);
@@ -159,14 +158,6 @@ public class ServiceTest {
 		
 		BoardRole testBR = new BoardRole();
 		testBR.setBrId(new BoardRoleId(boardUser, brb));
-		
-		//get hard coded admin role
-		Role adminRole = new Role();
-		adminRole.setId(1);
-		adminRole = service.getRole(adminRole);
-		boardRole.setR_id(adminRole);
-		service.updateBoardRole(boardRole);
-		System.out.println(boardRole);
 		
 		//delete all created records
 		service.deleteBoardRole(boardRole);
