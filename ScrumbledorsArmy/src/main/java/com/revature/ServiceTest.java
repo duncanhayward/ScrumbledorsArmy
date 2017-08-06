@@ -25,6 +25,9 @@ public class ServiceTest {
 		ApplicationContext ac = new ClassPathXmlApplicationContext("beans.xml");
 		AppService service = (AppService) ac.getBean("AppServiceImpl");
 		
+
+		//user service test
+		
 		User user = new User();
 		user.setEmail("dunca@aol.com");
 		user.setPassword("1");
@@ -33,11 +36,16 @@ public class ServiceTest {
 		System.out.println(user);
 		user.setId(service.insertUser(user));
 		user=service.getUser(user);
+		User newUser = new User();
+		newUser.setId(1);
+		newUser = service.getUser(user);
+		System.out.println(newUser);
 		user.setEmail("dun@sad.com");
 		service.updateUser(user);
 		System.out.println(user);
 		
-		
+		// Board service test
+	
 		Board board = new Board();
 		board.setName("morestuff");
 		board.setDescription("aLotofStuff");
@@ -48,7 +56,8 @@ public class ServiceTest {
 		service.updateBoard(board);
 		System.out.println(board);
 		
-		
+		//swimlane service test
+
 		SwimLane lane = new SwimLane();
 		lane.setBoard(board);
 		lane.setName("funnn");
@@ -60,6 +69,8 @@ public class ServiceTest {
 		service.updateSwimLane(lane);
 		System.out.println(lane);
 		
+		//story service test
+
 		
 		Story story = new Story();
 		story.setSwimLane(lane);
@@ -74,6 +85,8 @@ public class ServiceTest {
 		service.updateStory(story);
 		System.out.println(story);
 		
+
+		//tast service test
 		
 		Task task = new Task();
 		task.setStory(story);
@@ -87,6 +100,10 @@ public class ServiceTest {
 		service.updateTask(task);
 		System.out.println(task);
 		service.deleteTask(task);
+
+		
+		//	role service test, though these methods should not be accessible
+		//	to scrumbleboard clients as of now, just developers and possibly admin
 		
 		Role role = new Role();
 		role.setRole("i");
@@ -98,7 +115,7 @@ public class ServiceTest {
 		service.updateRole(role);
 		System.out.println(role);
 		
-
+		//burn down chart service test
 		
 		BoardChart bdChart = new BoardChart();
 		bdChart.setBoard(board);
@@ -112,6 +129,8 @@ public class ServiceTest {
 		service.updateBdChart(bdChart);
 		System.out.println(bdChart);
 		service.deleteBdChart(bdChart);
+		
+		//board role service test
 		
 		BoardRole boardRole = new BoardRole();
 		BoardRoleId boardRoleId = new BoardRoleId();
@@ -133,6 +152,26 @@ public class ServiceTest {
 		System.out.println(boardRole);
 		service.deleteBoardRole(boardRole);
 		service.deleteUser(user);
+		User boardUser = new User();
+		boardUser.setId(1);
+		Board brb = new Board();
+		brb.setId(board.getId());
+		
+		BoardRole testBR = new BoardRole();
+		testBR.setBrId(new BoardRoleId(boardUser, brb));
+		
+		//get hard coded admin role
+		Role adminRole = new Role();
+		adminRole.setId(1);
+		adminRole = service.getRole(adminRole);
+		boardRole.setR_id(adminRole);
+		service.updateBoardRole(boardRole);
+		System.out.println(boardRole);
+		
+		//delete all created records
+		service.deleteBoardRole(boardRole);
+		service.deleteUser(user);
+		service.deleteTask(task);
 		service.deleteStory(story);
 		service.deleteSwimLane(lane);
 		service.deleteBoard(board);
