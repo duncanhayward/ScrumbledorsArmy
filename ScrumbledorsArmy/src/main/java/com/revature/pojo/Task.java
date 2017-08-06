@@ -30,7 +30,7 @@ public class Task implements Serializable {
   @Column(name = "T_ID")
   private int id;
   
-  @ManyToOne(fetch=FetchType.LAZY)
+  @ManyToOne(fetch=FetchType.EAGER)
   @JoinColumn(name = "S_ID")
   private Story story;
   
@@ -38,12 +38,12 @@ public class Task implements Serializable {
   private String description;
   
   @Column(name = "T_DONE")
-  private String done; // actual type is constrained char treated as boolean
+  private char done; // actual type is constrained char treated as boolean
 
   public Task() {
   }
 
-  public Task(int id, Story story, String description, String done) {
+  public Task(int id, Story story, String description, char done) {
     super();
     this.id = id;
     this.story = story;
@@ -52,9 +52,9 @@ public class Task implements Serializable {
   }
 
   @Override
-  public String toString() {
-    return "Task [id=" + id + ", story=" + story + ", description=" + description + ", done=" + done + "]";
-  }
+public String toString() {
+	return "Task [id=" + id + ", story=" + story + ", description=" + description + ", done=" + done + "]";
+}
 
   public int getId() {
     return id;
@@ -80,11 +80,11 @@ public class Task implements Serializable {
     this.description = description;
   }
 
-  public String getDone() {
+  public char getDone() {
     return done;
   }
 
-  public void setDone(String done) {
+  public void setDone(char done) {
     this.done = done;
   }
 

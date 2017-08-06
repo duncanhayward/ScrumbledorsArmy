@@ -26,7 +26,10 @@ public class BoardRoleDaoImpl implements Dao<BoardRole> {
 	@Override
 	public Integer insert(BoardRole obj) {
 		Session session = sessionFactory.getCurrentSession();
-		return (Integer) session.save(obj);
+		session.save(obj);
+		//already know the boardRoleId so returning a 0 to 
+		//indicate the method executed without an exception
+		return 0;
 	}
 
 	@Override

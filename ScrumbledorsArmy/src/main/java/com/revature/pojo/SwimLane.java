@@ -1,8 +1,10 @@
 package com.revature.pojo;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
-
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -11,6 +13,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -18,76 +21,87 @@ import javax.persistence.Table;
 @Table(name = "SWIM_LANE")
 public class SwimLane implements Serializable {
 
-  /**
-   * 
-   */
-  private static final long serialVersionUID = -8833805833751660619L;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8833805833751660619L;
 
-  @Id
-  @SequenceGenerator(name = "seq", sequenceName = "SWIM_LANE_SEQ")
-  @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq")
-  @Column(name = "SL_ID")
-  private int id;
-  
-  @ManyToOne(fetch=FetchType.LAZY)
-  @JoinColumn(name = "B_ID")
-  private Board board;
-  
-  @Column(name = "SL_NAME")
-  private String name;
-  
-  @Column(name = "SL_ORDER")
-  private int order;
+	//not necessary for save
+	@Id
+	@SequenceGenerator(name = "seq", sequenceName = "SWIM_LANE_SEQ")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq")
+	@Column(name = "SL_ID")
+	private int id;
 
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "B_ID")
+	private Board board;
 
-  public SwimLane() {
-  }
+	@Column(name = "SL_NAME")
+	private String name;
 
-  public SwimLane(int id, Board board, String name, int order) {
+	@Column(name = "SL_ORDER")
+	private int order;
 
-    super();
-    this.id = id;
-    this.board = board;
-    this.name = name;
-    this.order = order;
-  }
+	//not necessary for save
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "swimLane", orphanRemoval = true)
+	private List<Story> storys = new ArrayList<>();
 
-  @Override
-  public String toString() {
-    return "SwimLane [id=" + id + ", board=" + board + ", name=" + name + ", order=" + order + "]";
-  }
+	public SwimLane() {
+	}
 
-  public int getId() {
-    return id;
-  }
+	public SwimLane(int id, Board board, String name, int order) {
 
-  public void setId(int id) {
-    this.id = id;
-  }
+		super();
+		this.id = id;
+		this.board = board;
+		this.name = name;
+		this.order = order;
+	}
 
-  public Board getBoard() {
-    return board;
-  }
+	@Override
+	public String toString() {
+		return "SwimLane [id=" + id + ", board=" + board + ", name=" + name + ", order=" + order + "]";
+	}
 
-  public void setBoard(Board board) {
-    this.board = board;
-  }
+	public int getId() {
+		return id;
+	}
 
-  public String getName() {
-    return name;
-  }
+	public void setId(int id) {
+		this.id = id;
+	}
 
-  public void setName(String name) {
-    this.name = name;
-  }
+	public Board getBoard() {
+		return board;
+	}
 
-  public int getOrder() {
-    return order;
-  }
+	public void setBoard(Board board) {
+		this.board = board;
+	}
 
-  public void setOrder(int order) {
-    this.order = order;
-  }
+	public String getName() {
+		return name;
+	}
 
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public int getOrder() {
+		return order;
+	}
+
+	public void setOrder(int order) {
+		this.order = order;
+	}
+	
+	public List<Story> getStorys() {
+		return storys;
+	}
+
+	public void setStorys(List<Story> storys) {
+		this.storys = storys;
+	}
 
 }
