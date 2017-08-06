@@ -31,7 +31,6 @@ public class ServiceTest {
 		user.setUsername("dunc");
 		user.setId(1);
 		System.out.println(user);
-		//service.insertUser(user);
 		user.setId(service.insertUser(user));
 		user=service.getUser(user);
 		user.setEmail("dun@sad.com");
@@ -91,6 +90,7 @@ public class ServiceTest {
 		
 		Role role = new Role();
 		role.setRole("i");
+		role.setId(-1);
 		System.out.println(role);
 		role.setId(service.insertRole(role));
 		role=service.getRole(role);
