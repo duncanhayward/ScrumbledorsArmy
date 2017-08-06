@@ -1,0 +1,95 @@
+<!-- 
+<!DOCTYPE html>
+<html ng-app>
+<head>
+<title>Drag & Drop</title>
+		
+		<script
+		  src="https://code.jquery.com/jquery-3.2.1.min.js">
+		</script>		
+		
+		<script>
+			function allowDrop(ev) {
+				ev.preventDefault();
+			}
+
+			function drag(ev) {
+				ev.dataTransfer.setData("text", ev.target.id);
+			}
+
+			function drop(ev) {
+				ev.preventDefault();
+				var data = ev.dataTransfer.getData("text");
+				ev.target.appendChild(document.getElementById(data));
+			}
+		</script>
+		
+	
+			<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
+
+	
+			<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
+			 
+ <link rel="stylesheet" type="text/css" href="cssDragDropEx.css">
+
+
+			<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		
+		
+			<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+			
+		
+			<script src="https://rawgit.com/fatlinesofcode/ngDraggable/master/ngDraggable.js"></script>
+			
+		
+</head>
+<body>
+
+ -->
+
+	<h1><strong><i>SCRUMble Board</i></strong></h1>
+<div class="container-fluid">
+	<!-- <div class="jumbotron"> -->
+		<div id="columns">
+		  <!-- <div class="column" id="div1" ondrop="drop(event)" ondragover="allowDrop(event)" draggable = "true" > -->
+			<!-- <header>To-Do</header> -->
+			<!-- <!-- <div id="newCard"></div> -->
+		  <!-- </div> -->
+		  <!-- <div class="column" id="div2" ondrop="drop(event)" ondragover="allowDrop(event)" draggable = "true" ><header>In Progress</header></div> -->
+		  <!-- <div class="column" id="div3" ondrop="drop(event)" ondragover="allowDrop(event)" draggable = "true" ><header>Testing</header></div> -->
+		  <!-- <div class="column" id="div4" ondrop="drop(event)" ondragover="allowDrop(event)" draggable = "true" ><header>Verify</header></div> -->
+		  <!-- <div class="column" id="div5" ondrop="drop(event)" ondragover="allowDrop(event)" draggable = "true" ><header>Done</header></div> -->
+		</div>
+		<br>
+		<!-- <button id="addCard" class="btn btn-info">Add Card</button> -->
+		
+		<div id='addLanes' class="container-fluid" >
+			<button id="addLane" class="btn btn-info" ng-click="addElement()">Add Lane</button>
+		</div>
+		
+		  <div ng-controller='MyCtrl'>
+    		<button ng-click='toggleModal()'>Open Modal Dialog</button>
+    			<modal-dialog show='modalShown' width='400px' height='60%'>
+     			 <p>Modal Content Goes here<p>
+   				</modal-dialog>
+ 		 </div>
+
+		<div class="container-fluid">
+			<div id ="target"></div>
+		</div>
+		
+		
+	</div>
+<!-- </div> -->
+<br>
+
+
+
+
+
+<!-- How to keep track of which div tag you are in : drag1.parentNode.id -->
+
+<!-- 
+</body>
+</html>
+ -->

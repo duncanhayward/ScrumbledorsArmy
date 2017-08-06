@@ -1,0 +1,12 @@
+  <div class="container">
+    <h1>Login Page</h1><br>
+    <div class="login" >
+       <h2>Login!!!</h2>
+       <input type="text" name="username" ng-model="username" required /><br>
+       <input ng-keyup="$event.keyCode == 13 ? login() : null" type="password" name="password" ng-model="password"  /><br>
+       <button class="btn btn-danger"  ng-click="login()">Login</button>
+         <button id= "submit" class="btn btn-primary"  ng-click="changePageToRegister()">Register</button>  
+     
+       
+    </div>
+  </div>
