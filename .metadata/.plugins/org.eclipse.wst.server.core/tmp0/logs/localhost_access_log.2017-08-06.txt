@@ -777,3 +777,5 @@
 0:0:0:0:0:0:0:1 - - [06/Aug/2017:16:16:31 -0400] "GET /ScrumbledorsArmy/static/HARRP.TTF HTTP/1.1" 200 18204
 0:0:0:0:0:0:0:1 - - [06/Aug/2017:16:16:31 -0400] "GET /ScrumbledorsArmy/static/dragDropEx.html HTTP/1.1" 200 2810
 0:0:0:0:0:0:0:1 - - [06/Aug/2017:16:16:33 -0400] "GET /ScrumbledorsArmy/static/login.html HTTP/1.1" 200 493
+0:0:0:0:0:0:0:1 - - [06/Aug/2017:16:19:52 -0400] "POST /ScrumbledorsArmy/login HTTP/1.1" 200 102
+0:0:0:0:0:0:0:1 - - [06/Aug/2017:16:19:52 -0400] "GET /ScrumbledorsArmy/static/home.html HTTP/1.1" 304 -

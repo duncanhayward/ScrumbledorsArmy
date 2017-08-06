@@ -1,7 +1,8 @@
-/**
+﻿/**
  * 
  */
 console.log('script was called')
+
 var addCardBtn = 0;
 var addTaskBtn = 0;
 var viewTask = 0;
@@ -448,3 +449,4 @@ var app = angular.module("routePage", ["ngRoute", "ngDragDrop", "ui.bootstrap"])
      }
 	
 })
+

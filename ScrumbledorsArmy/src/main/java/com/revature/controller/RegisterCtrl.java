@@ -17,25 +17,26 @@ import com.revature.service.AppServiceImpl;
 @RestController
 public class RegisterCtrl {
 
-    @Autowired
-    AppService app;
 
-    @RequestMapping(value = "/register", method = RequestMethod.POST)
-    public ResponseEntity<User> loginUser(@RequestBody User user) {
-        System.out.println("registering exsisting user");
-        app.insertUser(user);
-//        if (userReturned != null) {
-//            return new ResponseEntity<User>(userReturned, HttpStatus.OK);
-//        }
-//        else {
-//            return new ResponseEntity<User>(HttpStatus.IM_USED);
-//        }
+	@Autowired
+	AppService app;
 
-        System.out.println("User="+user);
-        return new ResponseEntity<User>(user, HttpStatus.OK);
-    }
-    
-    
+	@RequestMapping(value = "/register", method = RequestMethod.POST)
+	public ResponseEntity<User> loginUser(@RequestBody User user) {
+		System.out.println("registering exsisting user");
+		app.insertUser(user);
+//		if (userReturned != null) {
+//			return new ResponseEntity<User>(userReturned, HttpStatus.OK);
+//		}
+//		else {
+//			return new ResponseEntity<User>(HttpStatus.IM_USED);
+//		}
+
+		System.out.println("User="+user);
+		return new ResponseEntity<User>(user, HttpStatus.OK);
+	}
+	
+
 //    
 //    @Autowired
 //    AppServiceImpl app;
