@@ -7,6 +7,8 @@ import javax.persistence.Embeddable;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Embeddable
 public class BoardRoleId implements Serializable{
 	
@@ -33,6 +35,7 @@ public class BoardRoleId implements Serializable{
 		this.board = board;
 	}
 
+	@JsonIgnore
 	public User getUser() {
 		return user;
 	}

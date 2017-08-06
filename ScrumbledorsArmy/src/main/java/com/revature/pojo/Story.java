@@ -19,6 +19,8 @@ import javax.persistence.SequenceGenerator;
 
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "STORY")
 public class Story implements Serializable {
@@ -93,6 +95,7 @@ public class Story implements Serializable {
 		this.id = id;
 	}
 
+	@JsonIgnore
 	public SwimLane getSwimLane() {
 		return swimLane;
 	}

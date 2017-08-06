@@ -13,89 +13,93 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "BD_CHART")
 public class BoardChart implements Serializable {
 
-  /**
-   * 
-   */
-  private static final long serialVersionUID = 676631759009182870L;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 676631759009182870L;
 
-  @Id
-  @SequenceGenerator(name = "seq", sequenceName = "CHART_SEQ")
-  @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq")
-  @Column(name = "BD_ID")
-  private int id;
-  
-  @ManyToOne
-  @JoinColumn(name = "B_ID")
-  private Board board;
-  
-  @Column(name = "BD_START")
-  private Timestamp start;
-  
-  @Column(name = "BD_END")
-  private Timestamp end;
-  
-  @Column(name = "BD_NAME")
-  private String name;
+	@Id
+	@SequenceGenerator(name = "seq", sequenceName = "CHART_SEQ")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq")
+	@Column(name = "BD_ID")
+	private int id;
 
-  public BoardChart() {
-  }
+	@ManyToOne
+	@JoinColumn(name = "B_ID")
+	private Board board;
 
-  public BoardChart(int id, Board board, Timestamp start, Timestamp end, String name) {
-    super();
-    this.id = id;
-    this.board = board;
-    this.start = start;
-    this.end = end;
-    this.name = name;
-  }
+	@Column(name = "BD_START")
+	private Timestamp start;
 
-  @Override
-  public String toString() {
-    return "BoardChart [id=" + id + ", board=" + board + ", start=" + start + ", end=" + end + ", name=" + name + "]";
-  }
+	@Column(name = "BD_END")
+	private Timestamp end;
 
-  public int getId() {
-    return id;
-  }
+	@Column(name = "BD_NAME")
+	private String name;
 
-  public void setId(int id) {
-    this.id = id;
-  }
+	public BoardChart() {
+	}
 
-  public Board getBoard() {
-    return board;
-  }
+	public BoardChart(int id, Board board, Timestamp start, Timestamp end, String name) {
+		super();
+		this.id = id;
+		this.board = board;
+		this.start = start;
+		this.end = end;
+		this.name = name;
+	}
 
-  public void setBoard(Board board) {
-    this.board = board;
-  }
+	@Override
+	public String toString() {
+		return "BoardChart [id=" + id + ", board=" + board + ", start=" + start + ", end=" + end + ", name=" + name
+				+ "]";
+	}
 
-  public Timestamp getStart() {
-    return start;
-  }
+	public int getId() {
+		return id;
+	}
 
-  public void setStart(Timestamp start) {
-    this.start = start;
-  }
+	public void setId(int id) {
+		this.id = id;
+	}
 
-  public Timestamp getEnd() {
-    return end;
-  }
+	@JsonIgnore
+	public Board getBoard() {
+		return board;
+	}
 
-  public void setEnd(Timestamp end) {
-    this.end = end;
-  }
+	public void setBoard(Board board) {
+		this.board = board;
+	}
 
-  public String getName() {
-    return name;
-  }
+	public Timestamp getStart() {
+		return start;
+	}
 
-  public void setName(String name) {
-    this.name = name;
-  }
+	public void setStart(Timestamp start) {
+		this.start = start;
+	}
+
+	public Timestamp getEnd() {
+		return end;
+	}
+
+	public void setEnd(Timestamp end) {
+		this.end = end;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
 
 }
