@@ -14,7 +14,12 @@
     <button class="btn btn-danger" ng-click="logout()">Logout</button>
 </div>
 
-<button id= "scrumBtn" class="btn btn-primary"  ng-click="changeToScrum()">Scrumboard</button> 
+<div id="allBoards" data-ng-init="init()">
+</div>
+
+<br>
+
+<button id= "scrumBtn" class="btn btn-primary"  ng-click="addNewScrum()">Add New Scrumboard</button> 
 </div> 
 
 </body>

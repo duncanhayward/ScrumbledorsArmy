@@ -46,6 +46,7 @@ public class UserDaoImpl implements Dao<User> {
     for (Criterion c : restrictions) {
       crit.add(c);
     }
+    crit.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
     return (List<User>) crit.list();
   }
 

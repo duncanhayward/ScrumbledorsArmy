@@ -22,6 +22,7 @@ public class LoginCtrl {
 		System.out.println("updating exsisting user");
 		User userReturned = app.authenticateUser(user);
 		if (userReturned != null) {
+			System.out.println("User's board roles: " + userReturned.getBoardRoles());
 			return new ResponseEntity<User>(userReturned, HttpStatus.OK);
 		}
 		else {

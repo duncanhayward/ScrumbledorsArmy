@@ -11,7 +11,7 @@ var taskId=1;
 
 var Tasks = [];
 
-for (var i=0;i<10;i++) {
+for (var i=0;i<100;i++) {
     Tasks[i] = [];
  }
 //Tasks[1]={};
@@ -180,21 +180,43 @@ var app = angular.module("routePage", ["ngRoute", "ngDragDrop", "ui.bootstrap"])
 	
 //})
 
-.controller("scrumPageCtrl", function($scope, $http, $location) {
+.controller("scrumPageCtrl", function($scope, $http, $location,  $rootScope, $compile) {
 	 console.log('scrumCtrl callled');
-	 $scope.changeToScrum= function(){
+	 $scope.init= function(){
+		 
+		 console.log('init called');
+		 for(i=0; i < $rootScope.user.boardRoles.length; i++){
+			 $rootScope.user.boardRoles[i];
+				var newB = angular.element("<div class='btn btn-primary' id='"+ $rootScope.user.boardRoles[i].brId.board.id + "'  data-ng-init='loadBoardData()' ng-click ='loadboard("+ i +")'>"+ $rootScope.user.boardRoles[i].brId.board.name +"</div><span> </span>");
+				var newBoard = $compile(newB)($scope);
+				var target= angular.element( document.querySelector( '#allBoards' ));//document.getElementById("allBoards");
+				angular.element(target).append(newBoard);
+				
+				//"+ $rootScope.user.boardRoles[i].brId.board.id +"
+		 } 
+	 }
+	 
+	 $scope.addNewScrum= function(){
 		
-			$location.path('/scrumboard');
+			$location.path('/addboard');
 		  }
 	 
 	 $scope.logout = function(){
          $location.path('/login');
      }
+	 
+	 $scope.loadboard= function(boardId){
+		 $rootScope.currentBoardIndex= boardId;
+		 console.log('BoardId='+ boardId);
+		 $location.path('/scrumboard');
+	 }
+	 
+	 
 	
 	
 })
 
-.controller("loginCtrl", function($scope, $http, $location) {
+.controller("loginCtrl", function($scope, $rootScope, $http, $location) {
   var username = "jay";
   var password = "123";
   
@@ -228,10 +250,19 @@ var app = angular.module("routePage", ["ngRoute", "ngDragDrop", "ui.bootstrap"])
             data: user  
           }).then(function successCallback(response) 
             {
-        		
-        		$scope.response= JSON.stringify(response.data.username);
-        		console.log('response.data->'+$scope.response);
+        		$rootScope.user= response.data;
+        	 userJSON= JSON.stringify(response.data);
+//        	 console.log('Swimlane length = '+ $rootScope.user.boardRoles[0].brId.board.swimLanes.length);
+        		var data = response.data;
+        		console.log('Response'+userJSON);
+        		console.log('Story length '+$rootScope.user.boardRoles[0].brId.board.swimLanes[0].storys.length );
+        		console.log('response.data ->'+ data.boardRoles[0].brId.board.swimLanes.length);
+//        		console.log('Swimlane length = '+ $rootScope.user.boardRoles[$rootScope.currentBoardId].swimLanes.length);
+        		console.log('response.boardlength ->'+ data.boardRoles.length);
+//        		console.log('response.data : user ->'+ JSON.parse(response));
             	console.log(response.status);
+            	
+          
             	if(response.status!=200){
             		console.log('Login Failed!!')
             		
@@ -255,12 +286,64 @@ var app = angular.module("routePage", ["ngRoute", "ngDragDrop", "ui.bootstrap"])
     }
 })
 
-.controller('scrumCtrl', function($scope, $compile, $location){
+.controller('scrumCtrl', function($scope, $compile, $location, $rootScope){
 	
 	var colId = 1;
 	var cardId = 0;
 	
+	console.log('BoardIndex = '+$rootScope.currentBoardIndex);
+	console.log('Swimlane length = '+ $rootScope.user.boardRoles[$rootScope.currentBoardIndex].brId.board.swimLanes.length);
+	
 
+	
+	$scope.loadBoardData= function(){
+		/*
+		 *		var storyCard = angular.element("<div class='card' id=" + cardId++ + " data-drag='true' jqyoui-draggable='{animate: true}' ng-Dblclick='addModal($event)'><div class='container-fluid'><p>" + document.getElementById('storyBox').value + "</p></div></div>");
+		var stories = $compile(storyCard)($scope);
+		
+		if(event.keyCode == 13){
+		angular.element(lane1).append(stories);
+		 * 
+		 * 	var viewTasks = angular.element("<a id='" + clicked.id + "'ng-click='viewTasks($event)'>View Tasks</a>");
+		console.log("This is the element that was clicked id" + clicked.id);
+		
+		var viewT = $compile(viewTasks)($scope);
+//		viewTask = viewTask + 1;
+//		}
+		
+		angular.element(clicked).append(viewT);
+		 * 
+		 */
+		//<div class='column' id='lane"+ $rootScope.user.boardRoles[i].brId.board.id  + "' data-drop='true' data-jqyoui-options jqyoui-droppable=" + "{onDrop:'dropCallback'}" + " ><header>"$rootScope.user.boardRoles[i].brId.board.id"</header></div>");
+		console.log('Swimlane length = '+ $rootScope.user.boardRoles[$rootScope.currentBoardIndex].brId.board.swimLanes.length);
+		
+		for(i=0; i<$rootScope.user.boardRoles[$rootScope.currentBoardIndex].brId.board.swimLanes.length;i++){
+			
+			var newL = angular.element("<div class='column' id='"+ $rootScope.user.boardRoles[$rootScope.currentBoardIndex].brId.board.swimLanes[i].id  + "' data-drop='true' data-jqyoui-options jqyoui-droppable=" + "{onDrop:'dropCallback'}" + " ><header>"+ $rootScope.user.boardRoles[$rootScope.currentBoardIndex].brId.board.swimLanes[i].name +"</header></div>");
+			var newLane = $compile(newL)($scope);
+			var target= angular.element( document.querySelector( '#columns' ));//document.getElementById("allBoards");
+			angular.element(target).append(newLane);
+			for(j=0;j<$rootScope.user.boardRoles[$rootScope.currentBoardIndex].brId.board.swimLanes[i].storys.length;j++){
+				var story = angular.element("<div class='card' id=" + $rootScope.user.boardRoles[$rootScope.currentBoardIndex].brId.board.swimLanes[i].storys[j].id + " data-drag='true' jqyoui-draggable='{animate: true}' ng-Dblclick='addModal($event)'><div class='container-fluid'><p>" + $rootScope.user.boardRoles[$rootScope.currentBoardIndex].brId.board.swimLanes[i].storys[j].description + "</p></div></div>");
+				var stories = $compile(story)($scope);
+				var target1= document.getElementById( $rootScope.user.boardRoles[$rootScope.currentBoardIndex].brId.board.swimLanes[i].id);//angular.element( document.querySelector( '#columns' ));
+				//+$rootScope.user.boardRoles[$rootScope.currentBoardIndex].brId.board.swimLanes[i].id
+				angular.element(target1).append(stories)
+				
+				var viewTask = angular.element("<a id='" + $rootScope.user.boardRoles[$rootScope.currentBoardIndex].brId.board.swimLanes[i].storys[j].id + "'ng-click='viewTasks2($event)'>View Tasks</a>");		
+				var viewTs = $compile(viewTask)($scope);
+				var target2 = document.getElementById($rootScope.user.boardRoles[$rootScope.currentBoardIndex].brId.board.swimLanes[i].storys[j].id); 
+					
+				angular.element(target2).append(viewTs);
+
+		}
+		
+		//loadBoardData();
+		
+		
+	}
+
+	}		
 	$scope.message="HELLO";
 	
 	$scope.addElement= function(){
@@ -371,7 +454,7 @@ var app = angular.module("routePage", ["ngRoute", "ngDragDrop", "ui.bootstrap"])
 			console.log("This is in the tasks: " + document.getElementById(taskId-1).value);
 			Tasks[$scope.clicked.id][0]= $scope.clicked.id;
 			//{"cardId" : $scope.clicked, "taskDesc" : document.getElementById(taskId-1).value};
-			Tasks[$scope.clicked.id][1]=document.getElementById(taskId-1).value;
+			Tasks[$scope.clicked.id][taskId-1]=document.getElementById(taskId-1).value;
 			
 //			document.getElementById('addTaskModal').style.display = "none";
 			document.getElementById('addTaskModal').remove();
@@ -409,8 +492,8 @@ var app = angular.module("routePage", ["ngRoute", "ngDragDrop", "ui.bootstrap"])
 			if(Tasks[i][0] == clicked1){
 				console.log(Tasks[i][0] == clicked1);
 //				var modal = angular.element( document.querySelector( '#tasks' ));
-//				for(j=0;j<Tasks[i].length;j++){
-				var thetask = angular.element("<li>" + Tasks[i][1] + "</li>");
+				for(j=0;j<Tasks[i].length;j++){
+				var thetask = angular.element("<li>" + Tasks[i][j] + "</li>");
 				var theTaskS = $compile(thetask)($scope);
 				
 				console.log("----------------------------------" + task + "---------------------------------");
@@ -419,7 +502,7 @@ var app = angular.module("routePage", ["ngRoute", "ngDragDrop", "ui.bootstrap"])
 				
 				myEl.append(theTaskS);
 				
-//				}
+				}
 				
 				}
 		}
@@ -430,6 +513,60 @@ var app = angular.module("routePage", ["ngRoute", "ngDragDrop", "ui.bootstrap"])
 		
 		
 	}
+	
+	$scope.viewTasks2=function($event){
+		console.log("view tasks fn clicked!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+		
+//		var element1 = angular.element($event.target.parentNode.parentNode);
+		var clicked1 =$event.target.id;
+		console.log('clicked1- '+ clicked1);
+		var views = angular.element("<div class='modal fade in' id='viewTaskModal' role='dialog' style='display: block;'><div class='modal-dialog'><div class='modal-content'><div class='modal-header'><h4 class='modal-title'>View Task(s)</h4><button type='button' class='close' ng-click='close()' data-dismiss='modal'>&times;</button></div><div class='modal-body'><ul id='tasks'></ul></div></div></div></div></div>");
+		var viewTs = $compile(views)($scope);
+		
+//		var thetasks = angular.element("<h1>A NEW TASK!</h1>");
+//		var ttasks = $compile(thetasks)($scope);
+//		
+//		angular.element(document.getElementById('tasksGo')).append(ttasks);
+		
+//		console.log(Tasks[0]);
+		
+		
+		//to get cardID : Tasks[2].cardId.id
+		//to get task Value : Tasks[1].taskDesc
+		
+	
+		
+//		console.log("Checking clicked" + $scope.clicked1.id);
+		var target2 = document.getElementById(clicked1);
+		angular.element(target2).append(viewTs);
+		
+//		for(i = 0; i < Tasks.length; i++){
+//			console.log('Task[][0]'+Tasks[i][0]);
+//			if(Tasks[i][0] == clicked1){
+//				console.log(Tasks[i][0] == clicked1);
+////				var modal = angular.element( document.querySelector( '#tasks' ));
+//				for(j=0;j<Tasks[i].length;j++){
+//				var thetask = angular.element("<li>" + Tasks[i][j] + "</li>");
+//				var theTaskS = $compile(thetask)($scope);
+//				
+//				console.log("----------------------------------" + task + "---------------------------------");
+//				
+//				var myEl = angular.element( document.querySelector( '#tasks' ) );
+//				
+//				myEl.append(theTaskS);
+//				
+//				}
+//				
+//				}
+//		}
+		
+		
+		
+		
+		
+		
+	}
+	
 	
 	$scope.dropCallback=function($event){
 		console.log("Successfully dragged to a new lane");
@@ -448,5 +585,23 @@ var app = angular.module("routePage", ["ngRoute", "ngDragDrop", "ui.bootstrap"])
          $location.path('/login');
      }
 	
-})
+}).service('boardservice', function($rootScope, $compile, $scope){
+	
+		
+		this.loadB = function(){
+			//<div class='column' id='lane"+ $rootScope.user.boardRoles[i].brId.board.id  + "' data-drop='true' data-jqyoui-options jqyoui-droppable=" + "{onDrop:'dropCallback'}" + " ><header>"$rootScope.user.boardRoles[i].brId.board.id"</header></div>");
+			console.log('Swimlane length = '+ $rootScope.user.boardRoles[$rootScope.currentBoardIndex].brId.board.swimLanes.length);
+			
+			for(i=0; i<$rootScope.user.boardRoles[$rootScope.currentBoardIndex].brId.board.swimLanes.length;i++){
+				
+				var newL = angular.element("<div class='column' id='"+ $rootScope.user.boardRoles[$rootScope.currentBoardIndex].brId.board.swimLanes[i].id  + "' data-drop='true' data-jqyoui-options jqyoui-droppable=" + "{onDrop:'dropCallback'}" + " ><header>"+ $rootScope.user.boardRoles[$rootScope.currentBoardIndex].brId.board.swimLanes[i].description +"</header></div>");
+				var newLane = $compile(newL)($scope);
+				var target= angular.element( document.querySelector( '#columns' ));//document.getElementById("allBoards");
+				angular.element(target).append(newLane);
+			}
+			
+			//loadBoardData();
+		}
+		
+	})
 
