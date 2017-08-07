@@ -15,7 +15,6 @@ import javax.persistence.Table;
 @Table(name = "BOARD_ROLE")
 public class BoardRole implements Serializable {
 
-
 	/**
 	 * 
 	 */

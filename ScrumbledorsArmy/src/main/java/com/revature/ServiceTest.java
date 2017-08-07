@@ -78,6 +78,7 @@ public class ServiceTest {
 		story.setDescription("some much fun");
 		story.setStart(new Timestamp(System.currentTimeMillis()));
 		story.setEndExpected(new Timestamp(story.getStart().getTime() + (14 * 24 * 60 * 60 * 1000)));
+		story.setDone('N');
 		System.out.println(story);
 		story.setId(service.insertStory(story));
 		story=service.getStory(story);

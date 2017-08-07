@@ -19,7 +19,6 @@ import com.revature.service.DriverTestService;
 public class Driver {
 
 	public static void main(String[] args) {
-		System.out.println("Test");
 
 		ApplicationContext ac = new ClassPathXmlApplicationContext("beans.xml");
 		DriverTestService service = (DriverTestService) ac.getBean("DriverAppService");

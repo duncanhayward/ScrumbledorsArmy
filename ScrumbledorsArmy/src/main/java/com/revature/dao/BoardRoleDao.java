@@ -18,5 +18,5 @@ public interface BoardRoleDao extends Dao<BoardRole> {
   public ArrayList<BoardRole> getPojoByBoardId(Board obj);
 
   public ArrayList<BoardRole> getPojoByRoleId(Role obj);
-  
+
 }

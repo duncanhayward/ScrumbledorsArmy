@@ -18,7 +18,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
 @Table(name = "BD_CHART")
 public class BoardChart implements Serializable {
-
 	/**
 	 * 
 	 */
