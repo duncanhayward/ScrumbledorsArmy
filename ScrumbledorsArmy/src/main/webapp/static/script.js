@@ -2,25 +2,27 @@
  * 
  */
 Date.prototype.addDays = function(days) {
-    var dat = new Date(this.valueOf())
-    dat.setDate(dat.getDate() + days);
-    return dat;
+	var dat = new Date(this.valueOf())
+	dat.setDate(dat.getDate() + days);
+	return dat;
 }
 
 function getDates(startDate, stopDate) {
-    var dateArray = new Array();
-    var currentDate = startDate;
-    while (currentDate <= stopDate) {
-        dateArray.push( new Date (currentDate) )
-        currentDate = currentDate.addDays(1);
-    }
-    return dateArray;
+	var dateArray = new Array();
+	var currentDate = startDate;
+	while (currentDate <= stopDate) {
+		dateArray.push(new Date(currentDate))
+		currentDate = currentDate.addDays(1);
+	}
+	return dateArray;
 }
-var range=getDates(new Date(2012, 08, 1),new Date(2012, 08, 15));
-console.log(range);
-var y=[101,99,95,80,75,68,50,45,42,39,35,20,15,0];
-var dps=[];
+//var range = getDates(new Date(2012, 08, 1), new Date(2012, 08, 15));
+//console.log(range);
+var y = [];
+var dps = [];
 console.log('script was called')
+var x=[];
+var name;
 
 var app = angular
 		.module("routePage", [ "ngRoute" ])
@@ -41,10 +43,10 @@ var app = angular
 			}).when("/scrumboard", {
 				templateUrl : "dragDropEx.html",
 				controller : 'scrumCtrl'
-			}).when("/burndown",{
-				templateUrl:"Test.html",
-				controller:'BurndownCtrl'
-				
+			}).when("/burndown", {
+				templateUrl : "Test.html",
+				controller : 'BurndownCtrl'
+
 			});
 		})
 
@@ -93,17 +95,15 @@ var app = angular
 							$scope.registerUser();
 						}
 
-				
 					}
 					$scope.changePageToLogin = function() {
 						$location.path('/login');
 					}
-					
+
 					$scope.registerUser = function() {
-						
 
 						var ruser = {
-							email 	 :$scope.remail ,
+							email : $scope.remail,
 							username : $scope.rusername,
 							password : $scope.rpassword
 						};
@@ -112,98 +112,214 @@ var app = angular
 						console.log('id->' + ruser.email);
 						console.log('password->' + ruser.password);
 
-						$http({
-							method : 'POST',
-							url : 'http://localhost:8085/ScrumbledorsArmy/register',
-							headers : {
-								'Content-Type' : 'application/json',
-								'Accept' : 'application/json'
-							},
-							// data: user//user
-							data : ruser
-						}).then(function successCallback(response) {
+						$http(
+								{
+									method : 'POST',
+									url : 'http://localhost:8085/ScrumbledorsArmy/register',
+									headers : {
+										'Content-Type' : 'application/json',
+										'Accept' : 'application/json'
+									},
+									// data: user//user
+									data : ruser
+								}).then(
+								function successCallback(response) {
 
-							$scope.response = JSON.stringify(response.data.username);
-							console.log('response.data->' + $scope.response);
-							console.log(response.status);
-							if (response.status != 200) {
-								console.log('Register Failed!!');
+									$scope.response = JSON
+											.stringify(response.data.username);
+									console.log('response.data->'
+											+ $scope.response);
+									console.log(response.status);
+									if (response.status != 200) {
+										console.log('Register Failed!!');
 
-							} else {
-								console.log('Register Successfull');
-								$location.path('/login');
-								// $('.login').css('display', 'none');
-							}
+									} else {
+										console.log('Register Successfull');
+										$location.path('/login');
+										// $('.login').css('display', 'none');
+									}
 
-						}, function errorCallback(response) {
-							// called asynchronously if an error occurs
-							// or server returns response with an error status.
-							console.log('Not found');
-							// console.log(response);
-						});
+								}, function errorCallback(response) {
+									// called asynchronously if an error occurs
+									// or server returns response with an error
+									// status.
+									console.log('Not found');
+									// console.log(response);
+								});
 
 						console.log('User->' + ruser.username);
-						
+
+					}
+
+				})
+
+		.controller('ChartController', function($scope, $http) {
+
+			// var bdChart={
+			// ID: bdChart.id,
+			// BoardId: bdChart.board,
+			// Start: bdChart.start,
+			// End: bdChart.end,
+			// Name: bdChart.name
+			//		
+			//		
+			// };
+
+			$http({
+				method : 'GET',
+				url : 'http://localhost:8085/ScrumbledorsArmy/board/22'
+			// data:bdChart
+
+			}).then(function(response) {
+				console.log(response.data)
+				var board=response.data
+				var start = new Date(response.data.bdCharts[0].start)
+				var end = new Date(response.data.bdCharts[0].end)
+				console.log(start)
+				console.log(end)
+				x = getDates(start, end)
+				name=response.data.name
+				var swimlanes=board.swimLanes
+				console.log("begenning:"+x[0],"end"+x[x.length-1]);
+				for(var z = 0; z<x.length;z++){
+					y.push(0);
+					for(var i=0;i<swimlanes.length;i++){
+						for(var j=0;j<swimlanes[i].storys.length;j++){
+							console.log(new Date(swimlanes[i].storys[j].endActual));
+							if((new Date(swimlanes[i].storys[j].endExpected) > x[0] ||
+									new Date(swimlanes[i].storys[j].start) < x[x.length-1] )&&
+									(swimlanes[i].storys[j].endActual == null || 
+									new Date(swimlanes[i].storys[j].endActual) > x[z] )){
+								y[z]+= swimlanes[i].storys[j].points;
+							}
 						}
-					
-		})
-					
-					
-.controller('ChartController', function($scope) {
-	 $scope.chart = new CanvasJS.Chart("chartContainer", {
-		 
-		 
-		 	theme: 'theme1',
-		 
-		    title:{
-		    	text: "Basic Burndown chart" 
-		    	},
-		    	
-		    animationEnabled: true,
-		    axisY: {
-		             includeZero: true,
-		         },
-		 
-		    axisX: {
-		        	 valueFormatString:'DD',
-		        	 
-		    
-		        	 interval: 1,
-		        	 
-		        	 intervalType:"day"
-		         },
-		    toolTip:{
-		    	enabled:false
-		    	
-		    },
-		         
-		         data: [{
-		        	 		type: "area",
-		        	        markerSize:8,
-		        	        dataPoints:dps
-		        	 
-		        	       }]
-		        	 
-		        	     });
-	 function parseDatapoints(){
-		 for(var i=dps.length; i<range.length;i++){
-			 dps.push({
-				 x:range[i],
-				 y:y[i]
-			 });	
-		 }
-	 };
-	 function addDatapoints(){
-		 parseDatapoints();
-		$scope.chart.options.data[0].dataPoints=dps;
-		 $scope.chart.render();
-	 }
-	 addDatapoints();
-	 
-
-
-})
+					}
+					console.log("y[" + z + "] = "+y[z])
+				}
+				
+//				for(storys in swimlanes){
+//					if(storys.endActual==null){
+//						console.log('AHHHHHHH')
+//						y.push(storys.points)
+//						console.log(y)
+//						
+//					
+//					}
+//				}
+				
+				
 			
+				
+//				console.log(x)
+				console.log(y.length)
+				$scope.chart = new CanvasJS.Chart("chartContainer", {
+
+					theme : 'theme1',
+
+					title : {
+						text : name
+					},
+
+					animationEnabled : true,
+					axisY : {
+						includeZero : true,
+					},
+
+					axisX : {
+						valueFormatString : 'DD',
+
+						interval : 1,
+
+						intervalType : "day"
+					},
+					toolTip : {
+						enabled : false
+
+					},
+
+					data : [ {
+						type : "area",
+						markerSize : 8,
+						dataPoints : dps
+
+					} ]
+
+				});
+
+				
+//				console.log(x);
+				function parseDatapoints() {
+					for (var i = dps.length; i < x.length; i++) {
+						dps.push({
+							x : x[i],
+							y : y[i]
+						});
+					}
+				}
+				;
+				function addDatapoints() {
+					parseDatapoints();
+					$scope.chart.options.data[0].dataPoints = dps;
+					$scope.chart.render();
+				}
+				addDatapoints();
+				
+			});
+			
+
+//			$scope.chart = new CanvasJS.Chart("chartContainer", {
+//
+//				theme : 'theme1',
+//
+//				title : {
+//					text : "Basic chart"
+//				},
+//
+//				animationEnabled : true,
+//				axisY : {
+//					includeZero : true,
+//				},
+//
+//				axisX : {
+//					valueFormatString : 'DD',
+//
+//					interval : 1,
+//
+//					intervalType : "day"
+//				},
+//				toolTip : {
+//					enabled : false
+//
+//				},
+//
+//				data : [ {
+//					type : "area",
+//					markerSize : 8,
+//					dataPoints : dps
+//
+//				} ]
+//
+//			});
+//
+//			
+////			console.log(x);
+//			function parseDatapoints() {
+//				for (var i = dps.length; i < x.length; i++) {
+//					dps.push({
+//						x : x[i],
+//						y : y[i]
+//					});
+//				}
+//			}
+//			;
+//			function addDatapoints() {
+//				parseDatapoints();
+//				$scope.chart.options.data[0].dataPoints = dps;
+//				$scope.chart.render();
+//			}
+//			addDatapoints();
+
+		})
 
 		.controller("scrumPageCtrl", function($scope, $http, $location) {
 			console.log('scrumCtrl callled');
@@ -273,11 +389,23 @@ var app = angular
 			}
 		})
 
-		.controller('scrumCtrl', function($scope) {
+		.controller('scrumCtrl', function($scope, $http) {
+			
+			
+			$http({
+				method : 'GET',
+				url : 'http://localhost:8085/ScrumbledorsArmy/board/22'
+			// data:bdChart
+
+			}).then(function(response) {
+				console.log(response.data)
+				
+			})
 
 			$scope.message = "HELLO";
 
 			$scope.addElement = function() {
+				
 				console.log("scrumCtrl function called");
 
 				var newe = angular.element("<div class= 'column'>Test</div>");
