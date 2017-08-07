@@ -1,3 +1,0 @@
-#Tomcat publish data
-#Mon Aug 07 05:39:43 EDT 2017
-org.eclipse.jst.jee.server\:/binary\:C\:\\Users\\Jaydeep\\.m2\\repository\\org\\springframework\\spring-web\\4.2.5.RELEASE\\spring-web-4.2.5.RELEASE.jar=WEB-INF/lib/spring-web-4.2.5.RELEASE.jar
