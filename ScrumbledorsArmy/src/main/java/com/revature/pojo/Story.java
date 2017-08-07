@@ -56,7 +56,7 @@ public class Story implements Serializable {
 	private Timestamp endActual;
 
 	@Column(name = "S_DONE")
-	private String done; // actual type is constrained char treated as boolean
+	private char done; // actual type is constrained char treated as boolean
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "story", orphanRemoval = true)
 	private List<Task> tasks = new ArrayList<>();
@@ -66,7 +66,7 @@ public class Story implements Serializable {
 
 	public Story(int id, SwimLane swimLane, int points, String description, Timestamp start, Timestamp endExpected,
 
-			Timestamp endActual, String done) {
+			Timestamp endActual, char done) {
 
 		super();
 		this.id = id;
@@ -144,11 +144,11 @@ public class Story implements Serializable {
 		this.endActual = endActual;
 	}
 
-	public String getDone() {
+	public char getDone() {
 		return done;
 	}
 
-	public void setDone(String done) {
+	public void setDone(char done) {
 		this.done = done;
 	}
 
