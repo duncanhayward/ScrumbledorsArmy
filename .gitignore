@@ -1,11 +1,11 @@
 /.metadata/
 
-/ScrumbledorsArmy/target/
-/ScrumbledorsArmy/bin/
-
 /Servers/
 
 /RemoteSystemsTempFiles/
+
+/ScrumbledorsArmy/bin/
+/ScrumbledorsArmy/target/
 /ScrumbledorsArmy/.settings/
 /ScrumbledorsArmy/.classpath
 /ScrumbledorsArmy/.project

@@ -3,6 +3,7 @@
   <display-name>ScrumbledorsArmy</display-name>
   <!-- no need for a welcome file list with Spring mvc -->
   
+
   <!-- modeled after AngularTodo-Client-Template web.xml -->
   <!-- Map the front controller of Spring -->
 	<servlet>
@@ -10,11 +11,13 @@
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
 		<!-- init-param refers to ServletConfig setting an environment variable 
 			for a single servlet -->
+
 		<init-param>
 			<param-name>contextConfigLocation</param-name>
 			<param-value>/WEB-INF/beans.xml</param-value>
 		</init-param>
 	</servlet>
+
 	<servlet-mapping>
 		<servlet-name>SpringServlet</servlet-name>
 
@@ -33,4 +36,5 @@
 		<param-name>contextConfigLocation</param-name>
 		<param-value>/WEB-INF/beans.xml</param-value>
 	</context-param>
+
 </web-app>
